@@ -5,12 +5,6 @@ object Kerbin {
   val g = 9.81
 }
 
-sealed trait Fuel
-case object Liquid extends Fuel
-case object Solid extends Fuel
-case object Mono extends Fuel
-case object Xenon extends Fuel
-
 // TODO: consider mount converters in mass and cost
 sealed trait Mount
 case object Radial extends Mount
@@ -18,54 +12,6 @@ case object Tiny extends Mount
 case object Small extends Mount
 case object Large extends Mount
 case object ExtraLarge extends Mount
-
-sealed trait FuelTank {
-  /** Human readable name */
-  def name: String
-  /** Kind of fuel */
-  def fuel: Fuel
-  /** Kind of mounting */
-  def mount: Mount
-  /** Maximum supplied fuel (kKg) per container */
-  def max: Double
-  /** returns cost (Funds) for container with requested fuel (kKg) */
-  def cost(amount: Double): Double
-  /** returns mass (kKg) for container with requested fuel (kKg) */
-  def mass(amount: Double): Double
-  /** returns true iff a maximum of one tank of this type can be installed */
-  def unique: Boolean
-}
-/**
- * @param baseMass mass without any fuel
- * @param baseCost cost without any fuel
- * @param fullCost cost with a full tank
- * @param unique is only one allowed
- */
-case class FixedFuelTank(
-  name: String,
-  fuel: Fuel,
-  mount: Mount,
-  max: Double,
-  baseCost: Double,
-  baseMass: Double,
-  fullCost: Double,
-  unique: Boolean = false
-) extends FuelTank {
-  def cost(amount: Double): Double = {
-    require(amount >= 0 && amount <= max)
-    val fuelCost = fullCost - baseCost
-    baseCost + fuelCost * amount / max
-  }
-  def mass(amount: Double): Double = {
-    require(amount >= 0 && amount <= max)
-    baseMass + amount
-  }
-}
-
-class FuelTanks(val tanks: List[FuelTank])
-object FuelTanks {
-  implicit val Stock = new FuelTanks(Nil)
-}
 
 /**
  * @param name human readable
@@ -96,17 +42,23 @@ case class Engine(
 
   def validTanks(implicit all: FuelTanks): Set[FuelTank] = {
     all.tanks.filter { tank =>
-      fuel == tank.fuel && (mount == Radial || mount == tank.mount)
+      fuel == tank.fuel && (mount == Radial || tank.mount == Radial || mount == tank.mount)
     } ++ internal
   }.toSet
 }
 object Engine {
   // alternative constructor for engines with internal fuel tanks
+  // to better match the format of the columns on the kerbal wiki
   def apply(
     name: String, m: Mount, cost: Double, mass: Double, thrust: Double, atm: Double, vac: Double, f: Fuel,
     costWithFullTank: Double, massWithFullTank: Double
   ): Engine = Engine(name, m, cost, mass, thrust, atm, vac, f, Some(
-    FixedFuelTank("Internal", f, m, massWithFullTank - mass, 0, 0, costWithFullTank - cost, unique = true)
+    FixedFuelTank(
+      "Internal", f, m,
+      massWithFullTank - mass, massWithFullTank,
+      costWithFullTank - cost, costWithFullTank,
+      unique = true
+    )
   ))
 }
 
@@ -116,6 +68,7 @@ object Engines {
 
   // as of 2015-01-11
   // http://wiki.kerbalspaceprogram.com/wiki/Parts#Engines
+  // TODO: jet engines
   implicit val Stock = new Engines(List(
     // Liquid Engines
     Engine("LV-1R", Radial, 650, 0.03, 4, 220, 290, Liquid),
@@ -137,8 +90,6 @@ object Engines {
     Engine("Kerbodyne KR-2L", ExtraLarge, 20850, 6.5, 2500, 280, 380, Liquid),
     Engine("S3 KS-25x4 Cluster", ExtraLarge, 32400, 9.75, 3200, 320, 360, Liquid),
 
-    // TODO: jet engines
-
     // Solid Boosters
     Engine("Launch Escape System", Small, 791, 1, 750, 320, 360, Solid, 800, 1.1125),
     Engine("RT-10", Small, 65.2, 0.5, 250, 225, 240, Solid, 325, 3.7475),
@@ -147,57 +98,6 @@ object Engines {
     Engine("Sepratron I", Small, 45.2, 0.0125, 18, 100, 100, Solid, 50, 0.0725),
 
     // Ion Engines
-    // (doesn't account for electricity supply)
     Engine("PB-ION", Tiny, 5700, 0.25, 2, 0, 4200, Xenon)
   ))
-}
-
-
-/**
- * @param engines including mass of the internal tank, if appropriate
- * @param tank and mass of fuel
- */
-case class EngineSolution(
-  engines: List[(Engine, Option[Double])],
-  tank: (FuelTank, Double)
-) {
-  lazy val totalDeltaV: Double = ???
-  lazy val initialAccel: Double = ???
-  lazy val totalCost: Double = ???
-  lazy val totalMass: Double = ???
-}
-
-object CalculateFuel {
-  /**
-   * Given `(minimum delta v, payload mass, minimum acceleration)`
-   * will iterate all engines and fuel tanks, filtering on
-   * acceleration capability, and return the valid options.
-   *
-   * Things not currently supported:
-   *
-   * 1. multiple stages
-   * 2. multiple fuel tanks (except internal engines)
-   * 3. electricity / reaction wheel requirements
-   *
-   * Uses https://en.wikipedia.org/wiki/Tsiolkovsky_rocket_equation
-   *
-   *   \Delta v = v_e * ln (m_0 / m_1)
-   *
-   * @param dvMin minimum delta v required to perform the manoeuvres
-   * @param payloadMass the mass of the payload to be transported
-   * @param accelMin the minimum delta v / second required to manoeuvre
-   * @param engines the options to iterate
-   */
-  def solve(
-    dvMin: Double,
-    payloadMass: Double,
-    accelMin: Double
-  )(
-    implicit
-    engines: Engines,
-    allTanks: FuelTanks
-  ): Unit = {
-    ???
-  }
-
 }
