@@ -1,3 +1,5 @@
+//import scalariform.formatter.preferences._
+
 organization := "com.github.fommil"
 
 name := "kerbal"
@@ -5,6 +7,10 @@ name := "kerbal"
 scalaVersion := "2.11.5"
 
 version := "1.0-SNAPSHOT"
+
+libraryDependencies ++= Seq(
+  "org.scalatest" %% "scalatest" % "2.2.3" % "test"
+)
 
 scalacOptions in Compile ++= Seq(
   "-encoding", "UTF-8"
@@ -16,8 +22,18 @@ scalacOptions in Compile ++= Seq(
   ,"-language:implicitConversions"
 )
 
+fork := true
+
 maxErrors := 1
 
-scalariformSettings
+// waiting on
+// https://github.com/mdr/scalariform/issues/98
+// https://github.com/mdr/scalariform/issues/75
+// scalariformSettings
 
-scalaJSSettings
+// ScalariformKeys.preferences := ScalariformKeys.preferences.value
+//   .setPreference(DoubleIndentClassDeclaration, false)
+//   .setPreference(PreserveDanglingCloseParenthesis, true)
+
+// BROKEN https://github.com/scala-js/scala-js/issues/1446
+//scalaJSSettings
