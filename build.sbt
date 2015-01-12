@@ -9,7 +9,9 @@ scalaVersion := "2.11.5"
 version := "1.0-SNAPSHOT"
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.2.3" % "test"
+  "org.scala-lang.modules.scalajs" %%% "scalajs-jquery" % "0.6",
+  // no scalatest in scalajs :-(
+  "com.lihaoyi" %% "utest" % "0.2.4" % "test"
 )
 
 scalacOptions in Compile ++= Seq(
@@ -22,18 +24,23 @@ scalacOptions in Compile ++= Seq(
   ,"-language:implicitConversions"
 )
 
-fork := true
-
 maxErrors := 1
 
 // waiting on
 // https://github.com/mdr/scalariform/issues/98
 // https://github.com/mdr/scalariform/issues/75
 // scalariformSettings
-
+//
 // ScalariformKeys.preferences := ScalariformKeys.preferences.value
 //   .setPreference(DoubleIndentClassDeclaration, false)
 //   .setPreference(PreserveDanglingCloseParenthesis, true)
 
-// BROKEN https://github.com/scala-js/scala-js/issues/1446
-//scalaJSSettings
+scalaJSSettings
+
+skip in ScalaJSKeys.packageJSDependencies := false
+
+ScalaJSKeys.jsDependencies += scala.scalajs.sbtplugin.RuntimeDOM
+
+testFrameworks += new TestFramework("utest.runner.JvmFramework")
+
+//utest.jsrunner.Plugin.utestJsSettings
