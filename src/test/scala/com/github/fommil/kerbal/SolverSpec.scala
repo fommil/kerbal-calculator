@@ -1,14 +1,14 @@
 package com.github.fommil.kerbal
 
-import utest._
-import utest.ExecutionContext.RunNow
+import org.scalatest.FunSpec
+import org.scalatest.Matchers
 
-object SolverSpec extends TestSuite {
+class SolverSpec extends FunSpec with Matchers {
   import Engines.Stock
   import FuelTanks.Stock
 
-  val tests = TestSuite {
-    "should solve for a Kerbin to Mun 10 payload"-{
+  describe ("com.github.fommil.kerbal.Solver") {
+    it("should do something") {
       val results = Solver.solve(1200, 10, 20)
       assert(results.nonEmpty)
       println(results.sortBy(_.initialMass).take(3).map(_.prettyPrint).mkString("\n"))
