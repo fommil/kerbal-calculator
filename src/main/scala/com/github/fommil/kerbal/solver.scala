@@ -10,27 +10,29 @@ import math.log
  */
 case class EngineSolution(
   payloadMass: Double,
-  engines: List[Engine],
+  engine: Engine,
+  numberOfEngines: Int,
   tank: FuelTank,
   fuelMass: Double
 ) {
   // of the engine stage (i.e. not including the payload)
-  lazy val totalCost: Double = engines.map(_.cost).sum + tank.cost(fuelMass)
-  lazy val initialMass: Double = engines.map(_.mass).sum + tank.mass(fuelMass)
-  lazy val finalMass: Double = engines.map(_.mass).sum + tank.mass(0)
+  def totalCost: Double = engine.cost + tank.cost(fuelMass)
+  def initialMass: Double = engine.mass + tank.mass(fuelMass)
+  def finalMass: Double = engine.mass + tank.mass(0)
 
   // F = Ma
-  lazy val initialAccel: Double = engines.map(_.thrust).sum / initialMass
+  def initialAccel: Double = engine.thrust / (initialMass + payloadMass)
 
   // \Delta v = v_e * ln (m_0 / m_1)
-  // I_{sp} = \frac{\sum\limits_i F_{T_i} }
-  //               {\sum\limits_i \frac{F_{T_i} }{I_{sp_i} } }
-  lazy val totalDeltaV: Double = {
-    val thrust = engines.map(_.thrust).sum
-    val partImpulses = engines.map{e => e.thrust / e.ispVac}.sum
-    val ve = Kerbin.g * thrust / partImpulses
-    ve * log(finalMass / initialMass)
-  }
+  def totalDeltaV: Double =
+    engine.veVac * numberOfEngines * log((payloadMass + initialMass) / (payloadMass + finalMass))
+
+  def prettyPrint: String =
+    (if (numberOfEngines != 1) s"$numberOfEngines x " else "") +
+      s"${engine.name} with " +
+      (if (fuelMass == tank.max) "Full" else s"${fuelMass}t (${100 * fuelMass / tank.max}%)") +
+      s" tank of ${tank.name}: a = ${initialAccel}, dv = ${totalDeltaV}, cost = ${totalCost}, mass = ${initialMass}"
+
 }
 
 object Solver {
@@ -38,6 +40,11 @@ object Solver {
    * Given `(minimum delta v, payload mass, minimum acceleration)`
    * will iterate all engines and fuel tanks, filtering on
    * acceleration capability, and return the valid options.
+   *
+   * TODO: trim the results so that every filling of the tank is not
+   * shown. e.g. currently if a tank works with [50, 100%] of fuel,
+   * [50.0, 50.1, 50.2...] will all be provided as valid answers. Or
+   * keep this to plot graphically.
    *
    * Things not currently supported:
    *
@@ -81,9 +88,9 @@ object Solver {
   )(implicit allTanks: FuelTanks): Stream[EngineSolution] = for {
     numEngines <- (1 to 8).toStream // consider up to 8 radial engines
     if numEngines == 1 | engine.mount == Radial
-    tank <- engine.validTanks
-    fuel <- (0.0 to tank.max by 0.1)
-    if fuel > 0 & fuel <= tank.max // to, by, can jump the boundary
-  } yield EngineSolution(payloadMass, List.fill(numEngines)(engine), tank, fuel)
+    tank <- engine.validTanks ++ engine.internal
+    fuel <- (0.0 to tank.max by tank.max / 100)
+    if fuel > 0 & fuel <= tank.max // FIXME scala rounding errors
+  } yield EngineSolution(payloadMass, engine, numEngines, tank, fuel)
 
 }

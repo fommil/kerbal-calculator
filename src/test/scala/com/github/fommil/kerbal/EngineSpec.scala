@@ -19,8 +19,8 @@ class EngineSpec extends FunSpec with Matchers {
     }
 
     it("should return valid fuel tanks for the KR-1x2 engine") {
-      val expectKr1x2Tanks = largeLiquidTanks + kr1x2.internal.get
-      assert(kr1x2.validTanks === expectKr1x2Tanks, "kr1x2")
+      // it has an internal engine, but that is obtained separately
+      assert(kr1x2.validTanks === largeLiquidTanks, "kr1x2")
     }
   }
 }

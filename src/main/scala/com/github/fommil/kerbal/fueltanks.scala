@@ -45,7 +45,7 @@ case class FixedFuelTank(
     baseCost + fuelCost * amount / max
   }
   def mass(amount: Double): Double = {
-    require(amount >= 0 && amount <= max)
+    require(amount >= 0 && amount <= max, s"$amount was outside [0, $max]")
     emptyMass + amount
   }
 }

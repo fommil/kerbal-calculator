@@ -40,10 +40,10 @@ case class Engine(
   /** Effective exhaust velocity (vacuum). */
   def veVac: Double = Kerbin.g * ispVac
 
-  def validTanks(implicit all: FuelTanks): Set[FuelTank] = {
-    all.tanks.filter { tank =>
+  def validTanks(implicit external: FuelTanks): Set[FuelTank] = {
+    external.tanks.filter { tank =>
       fuel == tank.fuel && (mount == Radial || tank.mount == Radial || mount == tank.mount)
-    } ++ internal
+    }
   }.toSet
 }
 object Engine {
