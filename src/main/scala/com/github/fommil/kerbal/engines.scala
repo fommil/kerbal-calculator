@@ -65,6 +65,7 @@ object Engine {
 class Engines(val engines: List[Engine])
 object Engines {
   // TODO: parse the engines from a game install (including parsing mods)
+  // TODO: procedural engines https://github.com/Swamp-Ig/ProceduralParts/issues/101
 
   // as of 2015-01-11
   // http://wiki.kerbalspaceprogram.com/wiki/Parts#Engines

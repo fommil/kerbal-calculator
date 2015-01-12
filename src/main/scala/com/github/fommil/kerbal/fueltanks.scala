@@ -53,6 +53,7 @@ case class FixedFuelTank(
 class FuelTanks(val tanks: List[FuelTank])
 object FuelTanks {
   // TODO: parse the engines from a game install (including parsing mods)
+  // TODO: procedural fueltanks https://github.com/Swamp-Ig/ProceduralParts/issues/101
 
   // as of 2015-01-11
   // http://wiki.kerbalspaceprogram.com/wiki/Parts#Fuel_Tanks
