@@ -1,15 +1,15 @@
 package com.github.fommil.kerbal
 
-import scala.scalajs.test.JasmineTest
+import utest._
+import utest.ExecutionContext.RunNow
 
-object SolverSpec extends JasmineTest {
+object SolverSpec extends TestSuite {
   import Engines.Stock
   import FuelTanks.Stock
 
-  describe("Solver") {
-    it("should solve for a Kerbin to Mun 10 payload") {
+  val tests = TestSuite {
+    "should solve for a Kerbin to Mun 10 payload"-{
       val results = Solver.solve(1200, 10, 20)
-
       assert(results.nonEmpty)
       println(results.sortBy(_.initialMass).take(3).map(_.prettyPrint).mkString("\n"))
 

@@ -1,8 +1,9 @@
 package com.github.fommil.kerbal
 
-import scala.scalajs.test.JasmineTest
+import utest._
+import utest.ExecutionContext.RunNow
 
-object EngineSpec extends JasmineTest {
+object EngineSuite extends TestSuite {
   import Engines.Stock
   import FuelTanks.Stock
 
@@ -13,12 +14,12 @@ object EngineSpec extends JasmineTest {
     tank.mount == Large && tank.fuel == Liquid
   }.toSet
 
-  describe("Engine") {
-    it("should return valid fuel tanks for the Poodle engine") {
+  val tests = TestSuite {
+    "should return valid fuel tanks for the Poodle engine" - {
       assert(poodle.validTanks == largeLiquidTanks)
     }
 
-    it("should return valid fuel tanks for the KR-1x2 engine") {
+    "should return valid fuel tanks for the KR-1x2 engine" - {
       // it has an internal engine, but that is obtained separately
       assert(kr1x2.validTanks == largeLiquidTanks)
     }

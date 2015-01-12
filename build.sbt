@@ -1,15 +1,17 @@
-import ScalaJSKeys._
+//import scalariform.formatter.preferences._
 
 organization := "com.github.fommil"
+
 name := "kerbal"
-version := "1.0-SNAPSHOT"
 
 scalaVersion := "2.11.5"
+
+version := "1.0-SNAPSHOT"
 
 libraryDependencies ++= Seq(
   "org.scala-lang.modules.scalajs" %%% "scalajs-jquery" % "0.6",
   // no scalatest in scalajs :-(
-  "org.scala-lang.modules.scalajs" %% "scalajs-jasmine-test-framework" % scalaJSVersion % "test"
+  "com.lihaoyi" %% "utest" % "0.2.4" % "test"
 )
 
 scalacOptions in Compile ++= Seq(
@@ -24,7 +26,21 @@ scalacOptions in Compile ++= Seq(
 
 maxErrors := 1
 
+// waiting on
+// https://github.com/mdr/scalariform/issues/98
+// https://github.com/mdr/scalariform/issues/75
+// scalariformSettings
+//
+// ScalariformKeys.preferences := ScalariformKeys.preferences.value
+//   .setPreference(DoubleIndentClassDeclaration, false)
+//   .setPreference(PreserveDanglingCloseParenthesis, true)
+
 scalaJSSettings
 
-skip in packageJSDependencies := false
-jsDependencies += scala.scalajs.sbtplugin.RuntimeDOM
+skip in ScalaJSKeys.packageJSDependencies := false
+
+ScalaJSKeys.jsDependencies += scala.scalajs.sbtplugin.RuntimeDOM
+
+testFrameworks += new TestFramework("utest.runner.JvmFramework")
+
+//utest.jsrunner.Plugin.utestJsSettings
