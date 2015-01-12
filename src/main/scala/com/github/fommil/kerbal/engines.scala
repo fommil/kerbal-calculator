@@ -55,8 +55,8 @@ object Engine {
   ): Engine = Engine(name, m, cost, mass, thrust, atm, vac, f, Some(
     FixedFuelTank(
       "Internal", f, m,
-      massWithFullTank - mass, massWithFullTank,
       costWithFullTank - cost, costWithFullTank,
+      massWithFullTank - mass, massWithFullTank,
       unique = true
     )
   ))

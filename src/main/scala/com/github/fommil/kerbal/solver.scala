@@ -15,8 +15,10 @@ case class EngineSolution(
   tank: FuelTank,
   fuelMass: Double
 ) {
+  require(fuelMass > 0 && fuelMass <= tank.max)
+
   // of the engine stage (i.e. not including the payload)
-  def totalCost: Double = engine.cost + tank.cost(fuelMass)
+  def stageCost: Double = engine.cost + tank.cost(fuelMass)
   def initialMass: Double = engine.mass + tank.mass(fuelMass)
   def finalMass: Double = engine.mass + tank.mass(0)
 
@@ -30,8 +32,9 @@ case class EngineSolution(
   def prettyPrint: String =
     (if (numberOfEngines != 1) s"$numberOfEngines x " else "") +
       s"${engine.name} with " +
-      (if (fuelMass == tank.max) "Full" else s"${fuelMass}t (${100 * fuelMass / tank.max}%)") +
-      s" tank of ${tank.name}: a = ${initialAccel}, dv = ${totalDeltaV}, cost = ${totalCost}, mass = ${initialMass}"
+      (if (fuelMass == tank.max) "Full" else f"${fuelMass}%.1ft (${100 * fuelMass / tank.max}%.0f%%)") +
+  f" in a ${tank.name}" +
+  f" [a = ${initialAccel}%.1f, dv = ${totalDeltaV}%.0f, cost = ${stageCost}%.0f, mass = ${initialMass}%.1ft]"
 
 }
 
@@ -66,7 +69,7 @@ object Solver {
    * @param dvMin minimum delta v required to perform the manoeuvres
    * @param payloadMass the mass of the payload to be transported
    * @param accelMin the minimum delta v / second required to manoeuvre
-   * @param engines the options to iterate
+   * @param safety margin to use for upper limits
    */
   def solve(
     dvMin: Double,
