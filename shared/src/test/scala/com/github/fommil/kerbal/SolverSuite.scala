@@ -1,14 +1,13 @@
 package com.github.fommil.kerbal
 
-import org.scalatest.FunSpec
-import org.scalatest.Matchers
+import utest._
 
-class SolverSpec extends FunSpec with Matchers {
+object SolverSuite extends utest.TestSuite {
   import Engines.Stock
   import FuelTanks.Stock
 
-  describe("com.github.fommil.kerbal.Solver") {
-    it("should recommend one engine for a 10t payload from Kerbin to the Mun") {
+  def tests = TestSuite {
+    "should recommend one engine for a 10t payload from Kerbin to the Mun"-{
       val results = Solver.solve(1200, 10, 20).filter{soln =>
         soln.initialMass < 10
       }
