@@ -92,8 +92,8 @@ object Solver {
     numEngines <- (1 to 8).toStream // consider up to 8 radial engines
     if numEngines == 1 | engine.mount == Radial
     tank <- engine.validTanks ++ engine.internal
-    fuel <- (0.0 to tank.max by tank.max / 100)
-    if fuel > 0 & fuel <= tank.max // FIXME scala rounding errors
+    fuel <- (0 to 100 by 5).map(_ / 100.0 * tank.max)
+    if fuel > 0
   } yield EngineSolution(payloadMass, engine, numEngines, tank, fuel)
 
 }

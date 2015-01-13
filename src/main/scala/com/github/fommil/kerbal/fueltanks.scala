@@ -38,7 +38,12 @@ case class FixedFuelTank(
   fullMass: Double,
   unique: Boolean = false
 ) extends FuelTank {
+  require(fullMass > 0, name)
+  require(emptyMass >= 0, name)
+  require(fullMass > emptyMass, name)
+
   def max = fullMass - emptyMass
+
   def cost(amount: Double): Double = {
     require(amount >= 0 && amount <= max)
     val fuelCost = fullCost - baseCost
@@ -82,7 +87,7 @@ object FuelTanks {
     FixedFuelTank("Stratus-V Cylindrified Monopropellant", Mono, Radial, 620, 800, 0.15, 0.75),
 
     // Xenon
-    FixedFuelTank("B-X50R", Xenon, Radial, 600, 2200, 0.07, 0.03),
-    FixedFuelTank("PB-X150", Xenon, Tiny, 200, 3000, 0.12, 0.05)
+    FixedFuelTank("B-X50R", Xenon, Radial, 600, 2200, 0.03, 0.07),
+    FixedFuelTank("PB-X150", Xenon, Tiny, 200, 3000, 0.05, 0.12)
   ))
 }
