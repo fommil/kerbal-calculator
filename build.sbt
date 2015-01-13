@@ -29,10 +29,11 @@ lazy val js = project.in(file("js"))
   .settings(utest.jsrunner.Plugin.utestJsSettings: _*)
   .settings(sharedSettings: _*)
   .settings(
-    skip in ScalaJSKeys.packageJSDependencies := false,
+    //skip in ScalaJSKeys.packageJSDependencies := false,
     ScalaJSKeys.jsDependencies += scala.scalajs.sbtplugin.RuntimeDOM,
     libraryDependencies ++= Seq(
-      "org.scala-lang.modules.scalajs" %%% "scalajs-jquery" % "0.6"
+      "org.scala-lang.modules.scalajs" %%% "scalajs-jquery" % "0.6",
+      "com.scalatags" %%% "scalatags" % "0.4.2"
     )
   )
 

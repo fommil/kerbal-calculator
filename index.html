@@ -1,17 +1,71 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>Kerbal Engine Calculator</title>
-    <script type="text/javascript" src="kerbal-jsdeps.js"></script>
+    <meta charset="UTF-8"></meta>
+    <title>Kerbal Calculators</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <style type="text/css">
+      .input-group-left {
+      min-width: 100px;
+      text-align:right;
+      }
+      .input-group-right {
+      min-width: 60px;
+      text-align:left;
+      }
+    </style>
   </head>
   <body>
-    <button id="click-me-button" type="button">Click me!</button>
+    <div id="container">
+      <div id="header"></div>
 
-    <!-- MUST BE AT THE END -->
+      <div id="body" class="container">
+        <h2>Kerbal Engine Calculator</h2>
+        <form role="form">
+          <!-- TODO: mouse-over hints of the parameters -->
+          <div class="input-group">
+            <span class="input-group-addon input-group-left">Δv</span>
+            <input type="number" step="0.1" class="form-control" id="dv"/>
+            <span class="input-group-addon input-group-right">ms<sup>-1</sup></span>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon input-group-left">Payload</span>
+            <input type="number" step="0.1" class="form-control" id="M"/>
+            <span class="input-group-addon input-group-right">t</span>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon input-group-left">Acceleration</span>
+            <input type="number" class="form-control" id="a"/>
+            <span class="input-group-addon input-group-right">ms<sup>-2</sup></span>
+          </div>
+          <button id="submit" type="button" class="btn btn-primary">
+            <i id="spinner" class="fa fa-spinner fa-spin" style="display: none;"></i>
+            Submit
+          </button>
+        </form>
+
+        <div id="results"></div>
+
+      </div>
+
+      <div id="footer">
+        <p>© 2015 <a href="http://twitter.com/fommil">@fommil</a>
+        <a href="https://github.com/fommil/kerbal-calculator">Source</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Prefer deps at the end -->
+    <!-- <script type="text/javascript" src="kerbal-jsdeps.js"></script> -->
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery/2.1.1/jquery.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="kerbal-fastopt.js"></script>
     <script type="text/javascript">
       SolverJsApp().main();
     </script>
-  </body>
+  </div>
+</body>
 </html>
