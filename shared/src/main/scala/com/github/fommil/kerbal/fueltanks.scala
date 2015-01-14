@@ -57,12 +57,8 @@ case class FixedFuelTank(
 
 class FuelTanks(val tanks: List[FuelTank])
 object FuelTanks {
-  // TODO: parse the engines from a game install (including parsing mods)
-  // TODO: procedural fueltanks https://github.com/Swamp-Ig/ProceduralParts/issues/101
-
   // as of 2015-01-11
   // http://wiki.kerbalspaceprogram.com/wiki/Parts#Fuel_Tanks
-  // TODO: Spaceplane liquid/mono tanks and Jet Fuel
   implicit val Stock = new FuelTanks(List(
     // Liquid
     FixedFuelTank("ROUND-8 Toroidal", Liquid, Tiny, 349.8, 360, 0.025, 0.136),

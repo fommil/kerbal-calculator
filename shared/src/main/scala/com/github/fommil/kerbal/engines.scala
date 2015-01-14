@@ -5,7 +5,6 @@ object Kerbin {
   val g = 9.81
 }
 
-// TODO: consider mount converters in mass and cost
 sealed trait Mount
 case object Radial extends Mount
 case object Tiny extends Mount
@@ -64,12 +63,8 @@ object Engine {
 
 class Engines(val engines: List[Engine])
 object Engines {
-  // TODO: parse the engines from a game install (including parsing mods)
-  // TODO: procedural engines https://github.com/Swamp-Ig/ProceduralParts/issues/101
-
   // as of 2015-01-11
   // http://wiki.kerbalspaceprogram.com/wiki/Parts#Engines
-  // TODO: jet engines
   implicit val Stock = new Engines(List(
     // Liquid Engines
     Engine("LV-1R", Radial, 650, 0.03, 4, 220, 290, Liquid),

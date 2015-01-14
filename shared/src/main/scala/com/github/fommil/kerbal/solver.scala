@@ -44,11 +44,6 @@ object Solver {
    * will iterate all engines and fuel tanks, filtering on
    * acceleration capability, and return the valid options.
    *
-   * TODO: trim the results so that every filling of the tank is not
-   * shown. e.g. currently if a tank works with [50, 100%] of fuel,
-   * [50.0, 50.1, 50.2...] will all be provided as valid answers. Or
-   * keep this to plot graphically.
-   *
    * Things not currently supported:
    *
    * 0. atmospheric use.

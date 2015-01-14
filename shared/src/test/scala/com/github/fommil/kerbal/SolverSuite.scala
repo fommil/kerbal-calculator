@@ -13,7 +13,5 @@ object SolverSuite extends utest.TestSuite {
       }
       assert(results.map(_.engine.name).distinct.size == 1)
     }
-
-    // TODO: test with two types of engines, one more efficient than the other, it should always be selected
   }
 }
