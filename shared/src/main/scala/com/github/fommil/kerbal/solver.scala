@@ -19,12 +19,12 @@ case class EngineSolution(
   require(fuelMass > 0 && fuelMass <= tank.max)
 
   // of the engine stage (i.e. not including the payload)
-  def stageCost: Double = engine.cost + tank.cost(fuelMass)
-  def initialMass: Double = engine.mass + tank.mass(fuelMass)
-  def finalMass: Double = engine.mass + tank.mass(0)
+  def stageCost: Double = numberOfEngines * engine.cost + tank.cost(fuelMass)
+  def initialMass: Double = numberOfEngines * engine.mass + tank.mass(fuelMass)
+  def finalMass: Double = numberOfEngines * engine.mass + tank.mass(0)
 
   // F = Ma
-  def initialAccel: Double = engine.thrust / (initialMass + payloadMass)
+  def initialAccel: Double = numberOfEngines * engine.thrust / (initialMass + payloadMass)
 
   // \Delta v = v_e * ln (m_0 / m_1)
   def totalDeltaV: Double = {
@@ -80,8 +80,10 @@ object Solver {
   ): Stream[EngineSolution] = for {
     engine <- engines.engines.toStream
     candidate <- candidates(engine, payloadMass, atmosphere)
-    if candidate.totalDeltaV >= dvMin
-    if candidate.initialAccel >= accelMin
+    dv = candidate.totalDeltaV
+    if dv >= dvMin & dv < dvMin * 2 // arbitrary cutoff
+    a = candidate.initialAccel
+    if a >= accelMin & a < accelMin * 2 + 10 // arbitrary cutoff
   } yield candidate
 
   private def candidates(
