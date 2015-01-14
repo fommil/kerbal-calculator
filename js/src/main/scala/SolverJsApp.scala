@@ -20,6 +20,7 @@ object SolverJsApp extends JSApp {
 
   def solve(): Unit = {
     jQuery("#spinner").show()
+    jQuery("#results").empty()
 
     try {
       val dv = getParam("dv").toDouble
@@ -27,10 +28,11 @@ object SolverJsApp extends JSApp {
       val a = getParam("a").toDouble
       val atm = getCheckbox("atm")
 
+      println(s"$dv $m $a $atm")
+
       val solns = Solver.solve(dv, m, a, atm)
 
-      //jQuery("#results").append(solns.sortBy(_.initialMass).map(_.prettyPrint).mkString("<br/>"))
-      jQuery("#results").replaceWith(tabulate(solns.sortBy(_.initialMass)))
+      jQuery("#results").append(tabulate(solns.sortBy(_.initialMass)))
 
     } finally {
       jQuery("#spinner").hide()
