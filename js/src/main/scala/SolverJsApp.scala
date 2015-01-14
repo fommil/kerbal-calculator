@@ -16,6 +16,7 @@ object SolverJsApp extends JSApp {
   }
 
   private def getParam(id: String) = jQuery("#" + id).value().toString
+  private def getCheckbox(id: String) = jQuery("#" + id).is(":checked")
 
   def solve(): Unit = {
     jQuery("#spinner").show()
@@ -24,10 +25,9 @@ object SolverJsApp extends JSApp {
       val dv = getParam("dv").toDouble
       val m = getParam("M").toDouble
       val a = getParam("a").toDouble
+      val atm = getCheckbox("atm")
 
-      println(s"$dv $m $a")
-
-      val solns = Solver.solve(dv, m, a)
+      val solns = Solver.solve(dv, m, a, atm)
 
       //jQuery("#results").append(solns.sortBy(_.initialMass).map(_.prettyPrint).mkString("<br/>"))
       jQuery("#results").replaceWith(tabulate(solns.sortBy(_.initialMass)))

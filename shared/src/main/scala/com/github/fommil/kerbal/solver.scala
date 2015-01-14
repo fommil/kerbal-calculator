@@ -13,7 +13,8 @@ case class EngineSolution(
   engine: Engine,
   numberOfEngines: Int,
   tank: FuelTank,
-  fuelMass: Double
+  fuelMass: Double,
+  atmosphere: Boolean
 ) {
   require(fuelMass > 0 && fuelMass <= tank.max)
 
@@ -26,8 +27,10 @@ case class EngineSolution(
   def initialAccel: Double = engine.thrust / (initialMass + payloadMass)
 
   // \Delta v = v_e * ln (m_0 / m_1)
-  def totalDeltaV: Double =
-    engine.veVac * numberOfEngines * log((payloadMass + initialMass) / (payloadMass + finalMass))
+  def totalDeltaV: Double = {
+    val ve = if (atmosphere) engine.veAtm else engine.veVac
+    ve * numberOfEngines * log((payloadMass + initialMass) / (payloadMass + finalMass))
+  }
 
   def prettyPrint: String =
     (if (numberOfEngines != 1) s"$numberOfEngines x " else "") +
@@ -46,7 +49,6 @@ object Solver {
    *
    * Things not currently supported:
    *
-   * 0. atmospheric use.
    * 1. multiple stages (although, this is supported by
    *    reducing your dv requirement and calling this recursively
    *    after adding the additional decoupler mass cost).
@@ -69,26 +71,27 @@ object Solver {
   def solve(
     dvMin: Double,
     payloadMass: Double,
-    accelMin: Double
+    accelMin: Double,
+    atmosphere: Boolean
   )(
     implicit
     engines: Engines,
     allTanks: FuelTanks
   ): Stream[EngineSolution] = for {
     engine <- engines.engines.toStream
-    candidate <- candidates(engine, payloadMass)
+    candidate <- candidates(engine, payloadMass, atmosphere)
     if candidate.totalDeltaV >= dvMin
     if candidate.initialAccel >= accelMin
   } yield candidate
 
   private def candidates(
-    engine: Engine, payloadMass: Double
+    engine: Engine, payloadMass: Double, atmosphere: Boolean
   )(implicit allTanks: FuelTanks): Stream[EngineSolution] = for {
     numEngines <- (1 to 8).toStream // consider up to 8 radial engines
     if numEngines == 1 | engine.mount == Radial
     tank <- engine.validTanks ++ engine.internal
     fuel <- (0 to 100 by 5).map(_ / 100.0 * tank.max)
     if fuel > 0
-  } yield EngineSolution(payloadMass, engine, numEngines, tank, fuel)
+  } yield EngineSolution(payloadMass, engine, numEngines, tank, fuel, atmosphere)
 
 }

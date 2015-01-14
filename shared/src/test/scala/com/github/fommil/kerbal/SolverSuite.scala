@@ -8,7 +8,7 @@ object SolverSuite extends utest.TestSuite {
 
   def tests = TestSuite {
     "should recommend one engine for a 10t payload from Kerbin to the Mun"-{
-      val results = Solver.solve(1200, 10, 20).filter{soln =>
+      val results = Solver.solve(1200, 10, 20, false).filter{soln =>
         soln.initialMass < 10
       }
       assert(results.map(_.engine.name).distinct.size == 1)

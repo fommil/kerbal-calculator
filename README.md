@@ -9,18 +9,27 @@ To work out your engine and fuel requirements, you'll either need to
 do a lot of trial and error or solve the ideal rocket equation with
 some educated guesses. This calculator will do all that for you.
 
+The calculator is available at [http://fommil.github.io/kerbal](http://fommil.github.io/kerbal)
+
+
+## Run Locally
+
 To use, clone and run like so
 
 ```scala
-sbt "run 1200 10 50"
+sbt "run 1200 10 50 false"
 ```
 
 (You'll need [sbt](http://www.scala-sbt.org/download.html) and a Java Runtime)
 
-Input parameters being the **minimum deltav**, **payload mass**
-(including decouplers to engine stage) and **minimum acceleration**
-that you're willing to tolerate. Results will be ordered by the
-minimum initial mass of the engine stage.
+Input parameters being:
+
+1. **minimum deltav**
+2. **payload mass**
+3. **minimum acceleration**
+4. **atmosphere**
+
+Results will be ordered by the minimum initial mass of the engine stage.
 
 e.g. the above returns
 

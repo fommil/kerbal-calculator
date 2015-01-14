@@ -56,10 +56,18 @@
                  data-parsley-trigger="change" required/>
           <span class="input-group-addon input-group-right">ms<sup>-2</sup></span>
         </div>
-        <button id="submit" type="button" class="btn btn-primary">
-          <i id="spinner" class="fa fa-spinner fa-spin" style="display: none;"></i>
-          Submit
-        </button>
+        <div class="checkbox" data-toggle="tooltip"
+             data-original-title="Is the manoeuvre to be performed in an atmosphere?">
+          <label>
+            <input type="checkbox" id="atm">Atmosphere</input>
+          </label>
+        </div>
+        <div>
+          <button id="submit" type="button" class="btn btn-primary">
+            <i id="spinner" class="fa fa-spinner fa-spin" style="display: none;"></i>
+            Submit
+          </button>
+        </div>
       </form>
 
       <div id="results"></div>

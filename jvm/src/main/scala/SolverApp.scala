@@ -5,8 +5,8 @@ object Solve extends App {
   import FuelTanks.Stock
 
   args.toList match {
-    case dv :: mass :: a :: Nil =>
-      val solns = Solver.solve(dv.toDouble, mass.toDouble, a.toDouble)
+    case dv :: mass :: a :: atm :: Nil =>
+      val solns = Solver.solve(dv.toDouble, mass.toDouble, a.toDouble, atm.toBoolean)
       solns.sortBy(_.initialMass).foreach { soln =>
         println(soln.prettyPrint)
       }
