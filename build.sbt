@@ -1,6 +1,6 @@
-// note to self: build with 'sbt fastOptJS'
+// note to self: build with 'sbt fastOptJS' / fullOptJS
 
-lazy val uTestFramework = new TestFramework("utest.runner.JvmFramework")
+lazy val uTestFramework = new TestFramework("utest.runner.Framework")
 
 lazy val sharedSettings = Seq(
   organization := "com.github.fommil",
@@ -18,22 +18,28 @@ lazy val sharedSettings = Seq(
   ),
   unmanagedSourceDirectories in Compile += baseDirectory.value / "../shared/src/main/scala",
   unmanagedSourceDirectories in Test += baseDirectory.value / "../shared/src/test/scala",
-  libraryDependencies += "com.lihaoyi" %% "utest" % "0.2.4" % "test",
+  libraryDependencies += "com.lihaoyi" %%% "utest" % "0.2.5-RC1" % "test",
   testFrameworks += uTestFramework,
   // WORKAROUND https://github.com/lihaoyi/utest/issues/50
   testOptions in Test += Tests.Argument(uTestFramework, "--color=false")
 )
 
 lazy val js = project.in(file("js"))
-  .settings(scalaJSSettings: _*)
-  .settings(utest.jsrunner.Plugin.utestJsSettings: _*)
+  .enablePlugins(ScalaJSPlugin)
   .settings(sharedSettings: _*)
   .settings(
-    //skip in ScalaJSKeys.packageJSDependencies := false,
-    ScalaJSKeys.jsDependencies += scala.scalajs.sbtplugin.RuntimeDOM,
+    //skip in packageJSDependencies := false,
+    //scalaJSStage := FastOptStage,
+    jsDependencies += RuntimeDOM,
+    resolvers += Resolver.url(
+      "scala-js-releases",
+      url("http://dl.bintray.com/scala-js/scala-js-releases/")
+    )(
+      Resolver.ivyStylePatterns
+    ),
     libraryDependencies ++= Seq(
-      "org.scala-lang.modules.scalajs" %%% "scalajs-jquery" % "0.6",
-      "com.scalatags" %%% "scalatags" % "0.4.2"
+      "be.doeraene" %%% "scalajs-jquery" % "0.7.0",
+      "com.lihaoyi" %%% "scalatags" % "0.4.3-RC1"
     )
   )
 
@@ -43,4 +49,13 @@ lazy val jvm = project.in(file("jvm"))
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "2.2.3" % "test"
     )
+  )
+
+lazy val root = project.in(file("."))
+  .aggregate(js, jvm)
+  .settings(
+    sharedSettings: _*
+  ).settings(
+    publish := {},
+    publishLocal := {}
   )
