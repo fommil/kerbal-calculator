@@ -14,30 +14,33 @@ case class EngineSolution(
   numberOfEngines: Int,
   tank: FuelTank,
   fuelMass: Double,
-  atmosphere: Boolean
+  atmosphere: Boolean,
+  adapters: List[Adapter]
 ) {
   require(fuelMass > 0 && fuelMass <= tank.max)
+  require(adapters.size <= 2)
 
   // of the engine stage (i.e. not including the payload)
-  def stageCost: Double = numberOfEngines * engine.cost + tank.cost(fuelMass)
-  def initialMass: Double = numberOfEngines * engine.mass + tank.mass(fuelMass)
-  def finalMass: Double = numberOfEngines * engine.mass + tank.mass(0)
+  def stageCost: Double = numberOfEngines * engine.cost + tank.cost(fuelMass) + adapters.map(_.cost).sum
+  def stageInitialMass: Double = numberOfEngines * engine.mass + tank.mass(fuelMass) + adapters.map(_.mass).sum
+  def stageFinalMass: Double = numberOfEngines * engine.mass + tank.mass(0) + adapters.map(_.mass).sum
 
   // F = Ma
-  def initialAccel: Double = numberOfEngines * engine.thrust / (initialMass + payloadMass)
+  def initialAccel: Double = numberOfEngines * engine.thrust / (stageInitialMass + payloadMass)
 
   // \Delta v = v_e * ln (m_0 / m_1)
   def totalDeltaV: Double = {
     val ve = if (atmosphere) engine.veAtm else engine.veVac
-    ve * numberOfEngines * log((payloadMass + initialMass) / (payloadMass + finalMass))
+    ve * numberOfEngines * log((payloadMass + stageInitialMass) / (payloadMass + stageFinalMass))
   }
 
   def prettyPrint: String =
     (if (numberOfEngines != 1) s"$numberOfEngines x " else "") +
       s"${engine.name} with " +
       (if (fuelMass == tank.max) "Full" else f"${fuelMass}%.1ft (${100 * fuelMass / tank.max}%.0f%%)") +
-  f" in a ${tank.name}" +
-  f" [a = ${initialAccel}%.1f, dv = ${totalDeltaV}%.0f, cost = ${stageCost}%.0f, mass = ${initialMass}%.1ft]"
+      f" in a ${tank.name}" +
+      (if (adapters.isEmpty) "" else f" with adapters ${adapters.map(_.name)}") +
+      f" [a = ${initialAccel}%.1f, dv = ${totalDeltaV}%.0f, cost = ${stageCost}%.0f, mass = ${stageInitialMass}%.1ft]"
 
 }
 
@@ -66,20 +69,23 @@ object Solver {
    * @param dvMin minimum delta v required to perform the manoeuvres
    * @param payloadMass the mass of the payload to be transported
    * @param accelMin the minimum delta v / second required to manoeuvre
-   * @param safety margin to use for upper limits
+   * @param atmosphere is the manoeuvre to be performed in atmosphere
+   * @param size of the payload mount
    */
   def solve(
     dvMin: Double,
     payloadMass: Double,
     accelMin: Double,
-    atmosphere: Boolean
+    atmosphere: Boolean,
+    size: Mount
   )(
     implicit
     engines: Engines,
-    allTanks: FuelTanks
+    allTanks: FuelTanks,
+    adapters: Adapters
   ): Stream[EngineSolution] = for {
     engine <- engines.engines.toStream
-    candidate <- candidates(engine, payloadMass, atmosphere)
+    candidate <- candidates(engine, payloadMass, atmosphere, size)
     dv = candidate.totalDeltaV
     if dv >= dvMin & dv < dvMin * 2 // arbitrary cutoff
     a = candidate.initialAccel
@@ -87,12 +93,26 @@ object Solver {
   } yield candidate
 
   private def candidates(
-    engine: Engine, payloadMass: Double, atmosphere: Boolean
-  )(implicit allTanks: FuelTanks): Stream[EngineSolution] = for {
+    engine: Engine, payloadMass: Double, atmosphere: Boolean, size: Mount
+  )(implicit allTanks: FuelTanks, allAdapters: Adapters): Stream[EngineSolution] = for {
     tank <- (engine.validTanks ++ engine.internal).toStream
+    (payloadAdapter, engineAdapter) <- adapt(size, engine, tank)
     numEngines <- (1 to engine.mount.max(tank))
     fuel <- (0 to 100 by 5).map(_ / 100.0 * tank.max)
     if fuel > 0
-  } yield EngineSolution(payloadMass, engine, numEngines, tank, fuel, atmosphere)
+    adapters = (payloadAdapter ++ engineAdapter).toList
+  } yield EngineSolution(payloadMass, engine, numEngines, tank, fuel, atmosphere, adapters)
 
+  private def adapt(payload: Mount, engine: Engine, tank: FuelTank)(implicit all: Adapters): List[(Option[Adapter], Option[Adapter])] = {
+    def valids(upper: Mount, lower: Mount): List[Option[Adapter]] =
+      if (upper == lower) List(None)
+      else for {
+        adapter <- all.adapters
+        if adapter.lower == lower & adapter.upper == upper
+      } yield Some(adapter)
+    for {
+      top <- valids(payload, tank.mount)
+      bottom <- valids(tank.mount, engine.mount)
+    } yield (top, bottom)
+  }
 }

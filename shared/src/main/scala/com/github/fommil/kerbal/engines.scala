@@ -8,7 +8,18 @@ object Kerbin {
 sealed trait Mount {
   /** Maximum (sensible) number of parts to fit around the payload/tank. */
   def max(tank: FuelTank): Int = 1
+  def name: String = getClass.getSimpleName
 }
+object Mount {
+  def fromName(name: String)(implicit all: Adapters): Mount = {
+    for {
+      adapter <- all.adapters
+      mount <- List(adapter.upper, adapter.lower)
+      if mount.name.equals(name)
+    } yield mount
+  }.head
+}
+
 case object Tiny extends Mount
 case object Small extends Mount
 case object Large extends Mount
@@ -28,7 +39,6 @@ case class Radial(sizings: List[Int]) extends Mount {
 object Radial extends (List[Int] => Radial) {
   def apply(sizings: Int*): Radial = new Radial(sizings.toList)
 }
-
 
 /**
  * @param name human readable
@@ -114,4 +124,27 @@ object Engines {
     // Ion Engines
     Engine("PB-ION", Tiny, 5700, 0.25, 2, 0, 4200, Xenon)
   ))
+}
+
+case class Adapter(
+  name: String,
+  upper: Mount,
+  lower: Mount,
+  mass: Double,
+  cost: Double
+) {
+  require(upper != lower, "useless converter")
+  def reverse = Adapter(name, lower, upper, mass, cost)
+}
+
+class Adapters(val adapters: List[Adapter])
+object Adapters {
+  implicit val Stock = new Adapters(List(
+    Adapter("FL-A5", Tiny, Small, 0.04, 100),
+    Adapter("FL-A10", Tiny, Small, 0.05, 150),
+    Adapter("NCS", Tiny, Small, 0.30, 320),
+    Adapter("Rockomax Brand 02", Small, Large, 0.08, 450),
+    Adapter("Rockomax Brand", Small, Large, 0.10, 500),
+    Adapter("Kerbodyne ADTP-2-3", Large, ExtraLarge, 0.2, 2600)
+  ).flatMap { a => List(a, a.reverse) })
 }

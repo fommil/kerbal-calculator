@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fommil/kerbal-calculator.svg?branch=master)](https://travis-ci.org/fommil/kerbal-calculator)
+
 # kerbal-calculator
 
 Once you've designed your payload (or any combination of upper
@@ -17,7 +19,7 @@ The calculator is available at [http://fommil.github.io/kerbal](http://fommil.gi
 To use, clone and run like so
 
 ```scala
-sbt "run 1200 10 50 false"
+sbt "run 1200 10 50 false Large"
 ```
 
 (You'll need [sbt](http://www.scala-sbt.org/download.html) and a Java Runtime)
@@ -28,6 +30,7 @@ Input parameters being:
 2. **payload mass**
 3. **minimum acceleration**
 4. **atmosphere**
+5. **payload size**
 
 Results will be ordered by the minimum initial mass of the engine stage.
 
