@@ -79,11 +79,11 @@ object FuelTanks {
     FixedFuelTank("FL-R10", Mono, Tiny, 340, 400, 0.05, 0.37),
     FixedFuelTank("FL-R25", Mono, Small, 680, 800, 0.15, 1.15),
     FixedFuelTank("FL-R1", Mono, Large, 400, 1300, 0.4, 3.4),
-    FixedFuelTank("Stratus-V Roundified Monopropellant", Mono, Radial, 352, 400, 0.075, 0.315),
-    FixedFuelTank("Stratus-V Cylindrified Monopropellant", Mono, Radial, 620, 800, 0.15, 0.75),
+    FixedFuelTank("Stratus-V Roundified Monopropellant", Mono, Radial(1, 1, 1, 1), 352, 400, 0.075, 0.315),
+    FixedFuelTank("Stratus-V Cylindrified Monopropellant", Mono, Radial(1, 1, 1, 1), 620, 800, 0.15, 0.75),
 
     // Xenon
-    FixedFuelTank("B-X50R", Xenon, Radial, 600, 2200, 0.03, 0.07),
+    FixedFuelTank("B-X50R", Xenon, Radial(1, 1, 1, 1), 600, 2200, 0.03, 0.07),
     FixedFuelTank("PB-X150", Xenon, Tiny, 200, 3000, 0.05, 0.12)
   ))
 }

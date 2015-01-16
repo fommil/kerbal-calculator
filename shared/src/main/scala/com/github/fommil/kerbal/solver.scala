@@ -89,9 +89,8 @@ object Solver {
   private def candidates(
     engine: Engine, payloadMass: Double, atmosphere: Boolean
   )(implicit allTanks: FuelTanks): Stream[EngineSolution] = for {
-    numEngines <- (1 to 6).toStream // radially mounted
-    if numEngines == 1 | engine.mount == Radial
-    tank <- engine.validTanks ++ engine.internal
+    tank <- (engine.validTanks ++ engine.internal).toStream
+    numEngines <- (1 to engine.mount.max(tank))
     fuel <- (0 to 100 by 5).map(_ / 100.0 * tank.max)
     if fuel > 0
   } yield EngineSolution(payloadMass, engine, numEngines, tank, fuel, atmosphere)

@@ -5,12 +5,27 @@ object Kerbin {
   val g = 9.81
 }
 
-sealed trait Mount
-case object Radial extends Mount
+sealed trait Mount {
+  /** Maximum (sensible) number of parts to fit around the payload/tank. */
+  def max(tank: FuelTank): Int = 1
+}
 case object Tiny extends Mount
 case object Small extends Mount
 case object Large extends Mount
 case object ExtraLarge extends Mount
+
+case class Radial(sizings: Int*) extends Mount {
+  require(sizings.size == 4, "missing sizings")
+  require(sizings.forall(_ >= 0), "negatives not allowed")
+  override def max(tank: FuelTank): Int = tank.mount match {
+    case Tiny => sizings(0)
+    case Small => sizings(1)
+    case Large => sizings(2)
+    case ExtraLarge => sizings(3)
+    case Radial(_) => 0 // https://github.com/fommil/kerbal-calculator/issues/9
+  }
+}
+
 
 /**
  * @param name human readable
@@ -41,7 +56,7 @@ case class Engine(
 
   def validTanks(implicit external: FuelTanks): Set[FuelTank] = {
     external.tanks.filter { tank =>
-      fuel == tank.fuel && (mount == Radial || tank.mount == Radial || mount == tank.mount)
+      fuel == tank.fuel && (mount.isInstanceOf[Radial] || tank.mount.isInstanceOf[Radial] || mount == tank.mount)
     }
   }.toSet
 }
@@ -67,10 +82,10 @@ object Engines {
   // http://wiki.kerbalspaceprogram.com/wiki/Parts#Engines
   implicit val Stock = new Engines(List(
     // Liquid Engines
-    Engine("LV-1R", Radial, 650, 0.03, 4, 220, 290, Liquid),
-    Engine("O-10", Radial, 800, 0.09, 20, 220, 290, Mono),
-    Engine("Rockomax 24-77", Radial, 480, 0.09, 20, 250, 300, Liquid),
-    Engine("Rockomax Mark 55", Radial, 800, 0.9, 120, 320, 360, Liquid),
+    Engine("LV-1R", Radial(4, 6, 8, 12), 650, 0.03, 4, 220, 290, Liquid),
+    Engine("O-10", Radial(4, 6, 8, 12), 800, 0.09, 20, 220, 290, Mono),
+    Engine("Rockomax 24-77", Radial(2, 4, 6, 8), 480, 0.09, 20, 250, 300, Liquid),
+    Engine("Rockomax Mark 55", Radial(0, 2, 4, 6), 800, 0.9, 120, 320, 360, Liquid),
     Engine("LV-1", Tiny, 350, 0.03, 4, 220, 290, Liquid),
     Engine("Rockomax 48-7S", Tiny, 300, 0.1, 30, 300, 350, Liquid),
     Engine("LV-909", Small, 750, 0.5, 50, 300, 390, Liquid),
