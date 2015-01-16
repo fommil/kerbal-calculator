@@ -14,7 +14,7 @@ case object Small extends Mount
 case object Large extends Mount
 case object ExtraLarge extends Mount
 
-case class Radial(sizings: Int*) extends Mount {
+case class Radial(sizings: List[Int]) extends Mount {
   require(sizings.size == 4, "missing sizings")
   require(sizings.forall(_ >= 0), "negatives not allowed")
   override def max(tank: FuelTank): Int = tank.mount match {
@@ -24,6 +24,9 @@ case class Radial(sizings: Int*) extends Mount {
     case ExtraLarge => sizings(3)
     case Radial(_) => 0 // https://github.com/fommil/kerbal-calculator/issues/9
   }
+}
+object Radial extends (List[Int] => Radial) {
+  def apply(sizings: Int*): Radial = new Radial(sizings.toList)
 }
 
 
