@@ -1,5 +1,3 @@
-// note to self: build with 'sbt fastOptJS' / fullOptJS
-
 lazy val uTestFramework = new TestFramework("utest.runner.Framework")
 
 lazy val sharedSettings = Seq(

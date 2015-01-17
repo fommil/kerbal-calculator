@@ -1,0 +1,26 @@
+language: scala
+jdk:
+- openjdk7
+scala:
+- 2.11.5
+sudo: false
+cache:
+  directories:
+  - $HOME/.ivy2/cache
+before_install:
+- openssl aes-256-cbc -K $encrypted_d998cdda28d1_key -iv $encrypted_d998cdda28d1_iv -in .id_rsa.travis.enc -out $HOME/.ssh/id_rsa -d
+- chmod 600 $HOME/.ssh/id_rsa
+- git config --global user.email "sam.halliday@gmail.com"
+- git config --global user.name "Sam Halliday (Travis)"
+- git config --global push.default simple
+script:
+- sbt ++$TRAVIS_SCALA_VERSION clean test
+after_success:
+- sbt ++$TRAVIS_SCALA_VERSION clean fullOptJS
+- git clone git@github.com:fommil/fommil.github.io
+- cp -L index.html kerbal-opt.js fommil.github.io/kerbal
+- cd fommil.github.io
+- git add kerbal
+- git commit -m "auto deploy from CI"
+- git push
+
