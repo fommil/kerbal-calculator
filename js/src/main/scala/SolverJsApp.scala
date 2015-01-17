@@ -3,80 +3,43 @@ import scalatags.Text.all._
 import org.scalajs.jquery.jQuery
 import org.scalajs.dom
 
-import com.github.fommil.kerbal._
+import com.github.fommil
+import fommil.js._
+import fommil.kerbal._
 
-object SolverJsApp extends JSApp {
+object SolverJsApp extends JSApp
+  with CookieSupport
+  with InputFormSupport
+  with PersistentInputFormSupport {
 
-  // FIXME: cookies are Work In Progress
-  // note that you need to run from a webserver as some browsers
-  // will not store cookies for filesystem HTMLs.
-
-  def cookies = dom.document.cookie.split("; ").map{ entry =>
-    val i = entry.indexOf("=")
-    (entry.substring(0, i), entry.substring(i, entry.length))
-  }.toMap
-
-  def addCookie(key: String, value: String): Unit = {
-    dom.document.cookie = (cookies + (key -> value)).map{
-      case (k,v) => s"$k=$v"
-    }.mkString("; ")
-  }
-
-  def setupUI(): Unit = {
-    jQuery("#submit").click(solve _)
-
-    val sizes = jQuery("#size")
-    val saved = cookies.get("size").getOrElse("Large")
-
-    implicitly[Adapters].adapters.map(_.upper).distinct.map {
-      case mount if mount.name == saved =>
-        // bit of an ugly hack
-        option(mount.name, "selected".attr := "")
-      case mount => option(mount.name)
-    }.foreach { entry =>
-      sizes.append(entry.render)
-    }
-
-    List("dv", "M", "a").foreach { id =>
-      cookies.get(id).foreach { v =>
-        setParam(id, v)
-      }
-    }
-  }
+  // ids of the input parameters
+  val ids = List("dv", "M", "a", "atm", "size")
 
   def main(): Unit = {
-    jQuery(setupUI _)
+    jQuery("#submit").click(solve _)
+
+    val sizes = implicitly[Adapters].adapters.map(_.upper.name).distinct
+    populate("size", sizes)
+
+    loadParams(ids)
   }
-
-  private def getParam(id: String) = jQuery("#" + id).value().toString
-  private def getCheckbox(id: String) = jQuery("#" + id).is(":checked")
-
-  private def setParam(id: String, value: String) = jQuery("#" + id).attr("value", value)
-//  private def setCheckbox(id: String, value: ) = jQuery("#" + id).is(":checked")
 
   def solve(): Unit = {
     jQuery("#spinner").show()
     jQuery("#results").empty()
 
     try {
-      val dv = getParam("dv").toDouble
-      val m = getParam("M").toDouble
-      val a = getParam("a").toDouble
-      val atm = getCheckbox("atm")
-      val mount = Mount.fromName(getParam("size"))
+      val params = getParams(ids)
+      println(params)
 
-      val solns = Solver.solve(dv, m, a, atm, mount)
+      val solns = Solver.solve(ids.map(params(_)))
+
       jQuery("#results").append(tabulate(solns.sortBy(_.stageInitialMass)))
 
-      addCookie("dv", dv.toString)
-      addCookie("M", m.toString)
-      addCookie("a", a.toString)
-      addCookie("atm", atm.toString)
-      addCookie("size", mount.name)
+      persistParams(params)
     } finally {
       jQuery("#spinner").hide()
     }
-
   }
 
   def tabulate(solns: Seq[EngineSolution]) = table(`class` := "table table-hover")(

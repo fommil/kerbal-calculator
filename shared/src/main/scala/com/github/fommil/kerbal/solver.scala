@@ -33,15 +33,6 @@ case class EngineSolution(
     val ve = if (atmosphere) engine.veAtm else engine.veVac
     ve * numberOfEngines * log((payloadMass + stageInitialMass) / (payloadMass + stageFinalMass))
   }
-
-  def prettyPrint: String =
-    (if (numberOfEngines != 1) s"$numberOfEngines x " else "") +
-      s"${engine.name} with " +
-      (if (fuelMass == tank.max) "Full" else f"${fuelMass}%.1ft (${100 * fuelMass / tank.max}%.0f%%)") +
-      f" in a ${tank.name}" +
-      (if (adapters.isEmpty) "" else f" with adapters ${adapters.map(_.name)}") +
-      f" [a = ${initialAccel}%.1f, dv = ${totalDeltaV}%.0f, cost = ${stageCost}%.0f, mass = ${stageInitialMass}%.1ft]"
-
 }
 
 object Solver {
@@ -91,6 +82,22 @@ object Solver {
     a = candidate.initialAccel
     if a >= accelMin & a < accelMin * 2 + 10 // arbitrary cutoff
   } yield candidate
+
+  /** Friendlier with Stringly typed user interfaces */
+  def solve(
+    args: List[String]
+  )(
+    implicit
+    engines: Engines,
+    allTanks: FuelTanks,
+    adapters: Adapters
+  ): Stream[EngineSolution] = solve(
+    args(0).toDouble,
+    args(1).toDouble,
+    args(2).toDouble,
+    args(3).toBoolean,
+    Mount.fromName(args(4))
+  )
 
   private def candidates(
     engine: Engine, payloadMass: Double, atmosphere: Boolean, size: Mount
