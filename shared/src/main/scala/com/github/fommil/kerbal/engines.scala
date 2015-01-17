@@ -83,8 +83,8 @@ object Engine {
   ): Engine = Engine(name, m, cost, mass, thrust, atm, vac, f, Some(
     FixedFuelTank(
       "Internal", f, m,
-      costWithFullTank - cost, costWithFullTank,
-      massWithFullTank - mass, massWithFullTank,
+      0, costWithFullTank - cost,
+      0, massWithFullTank - mass,
       unique = true
     )
   ), wiki)
@@ -121,6 +121,12 @@ object Engines {
     Engine("Rockomax BACC", Small, 190, 1.5, 315, 230, 250, Solid, 700, 7.875, wiki = Some("Rockomax_BACC_Solid_Fuel_Booster")),
     Engine("S1 SRB-KD25k", Small, 300, 3.0, 650, 230, 250, Solid, 1800, 21.75, wiki = Some("S1_SRB-KD25k")),
     Engine("Sepratron I", Small, 45.2, 0.0125, 18, 100, 100, Solid, 50, 0.0725, wiki = Some("Sepratron_I")),
+
+    // HACK addressing https://github.com/fommil/kerbal-calculator/issues/9
+    Engine("RT-10 (Radial)", Radial(0, 2, 4, 6), 65.2, 0.5, 250, 225, 240, Solid, 325, 3.7475, wiki = Some("RT-10_Solid_Fuel_Booster")),
+    Engine("Rockomax BACC (Radial)", Radial(0, 2, 4, 6), 190, 1.5, 315, 230, 250, Solid, 700, 7.875, wiki = Some("Rockomax_BACC_Solid_Fuel_Booster")),
+    Engine("S1 SRB-KD25k (Radial)", Radial(0, 2, 4, 6), 300, 3.0, 650, 230, 250, Solid, 1800, 21.75, wiki = Some("S1_SRB-KD25k")),
+    Engine("Sepratron I (Radial)", Radial(4, 6, 8, 12), 45.2, 0.0125, 18, 100, 100, Solid, 50, 0.0725, wiki = Some("Sepratron_I")),
 
     // Ion Engines
     Engine("PB-ION", Tiny, 5700, 0.25, 2, 0, 4200, Xenon, wiki = Some("PB-ION_Electric_Propulsion_System"))
