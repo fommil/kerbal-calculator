@@ -42,7 +42,15 @@ object SolverJsApp extends JSApp
     }
   }
 
-  def tabulate(solns: Seq[EngineSolution]) = table(`class` := "table table-hover")(
+  private def optLink(name: String, wikiName: Option[String]) =
+    wikiName.map { wiki =>
+      a(
+        target := "_blank",
+        href := "http://wiki.kerbalspaceprogram.com/wiki/" + wiki
+      )(name)
+    }.getOrElse(name)
+
+  private def tabulate(solns: Seq[EngineSolution]) = table(`class` := "table table-hover")(
     thead(
       tr(
         th("Engine"), th("Tank"), th("Fuel"), th("Adapters"), th("Δv"), th("a"), th("M"), th("cost")
@@ -52,10 +60,26 @@ object SolverJsApp extends JSApp
       solns.zipWithIndex.map {
         case (s, i) =>
           tr(`class` := (if (i == 0) "success" else ""))(
-            td(s"${s.numberOfEngines} x ${s.engine.name}"),
-            td(s.tank.name),
+            raw(
+              "<td>" +
+                (if (s.numberOfEngines == 1) "" else s"${s.numberOfEngines} x ") +
+                optLink(s.engine.name, s.engine.wiki) +
+                "</td>"
+            ),
+            raw(
+              "<td>" +
+                optLink(s.tank.name, s.tank.wiki) +
+                "</td>"
+            ),
             td(f"${s.fuelMass}%.3ft (${100 * s.fuelMass / s.tank.max}%.0f%%)"),
-            td(s.adapters.map(_.name).mkString(", ")),
+            raw(
+              "<td>" + {
+                if (s.adapters.isEmpty) "-"
+                else {
+                  s.adapters.map { a => optLink(a.name, a.wiki) }.mkString(";")
+                }
+              } + "</td>"
+            ),
             td(f"${s.totalDeltaV}%.0f"),
             td(f"${s.initialAccel}%.1f"),
             td(f"${s.stageInitialMass}%.1f"),
