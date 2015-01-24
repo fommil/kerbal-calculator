@@ -11,13 +11,13 @@ sealed trait Mount {
   def name: String = getClass.getSimpleName
 }
 object Mount {
-  def fromName(name: String)(implicit all: Adapters): Mount = {
+  def fromName(name: String)(implicit all: Adapters): Option[Mount] = {
     for {
       adapter <- all.adapters
       mount <- List(adapter.upper, adapter.lower)
       if mount.name.equals(name)
     } yield mount
-  }.head
+  }.headOption
 }
 
 case object Tiny extends Mount
@@ -131,6 +131,9 @@ object Engines {
     // Ion Engines
     Engine("PB-ION", Tiny, 5700, 0.25, 2, 0, 4200, Xenon, wiki = Some("PB-ION_Electric_Propulsion_System"))
   ))
+
+  def fromName(name: String)(implicit all: Engines): Option[Engine] =
+    all.engines.find(_.name == name)
 }
 
 case class Adapter(

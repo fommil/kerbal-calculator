@@ -116,7 +116,7 @@ object Solver {
     args(1).toDouble,
     args(2).toDouble,
     args(3).toBoolean,
-    Mount.fromName(args(4))
+    Mount.fromName(args(4)).get
   )
 
   private def engineConfigs(engine: Engine, tank: FuelTank, payload: Mount): Traversable[Int] = engine.mount match {

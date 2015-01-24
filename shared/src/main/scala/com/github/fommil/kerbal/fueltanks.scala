@@ -1,10 +1,24 @@
 package com.github.fommil.kerbal
 
-sealed trait Fuel
-case object Liquid extends Fuel
-case object Solid extends Fuel
-case object Mono extends Fuel
-case object Xenon extends Fuel
+sealed trait Fuel {
+  /**
+   * Converts a mass, specified in the fuel's natural units,
+   * to 't'(onnes), ignoring oxidiser.
+   */
+  def toTonnes(units: Double): Double
+}
+case object Liquid extends Fuel {
+  def toTonnes(lg: Double) = 0.005 * lg
+}
+case object Solid extends Fuel {
+  def toTonnes(solid: Double) = 0.0075 * solid
+}
+case object Mono extends Fuel {
+  def toTonnes(mono: Double) = 0.004 * mono
+}
+case object Xenon extends Fuel {
+  def toTonnes(xe: Double) = 0.0001 * xe
+}
 
 sealed trait FuelTank {
   /** Human readable name */

@@ -14,17 +14,23 @@ object SolverJsApp extends JSApp
 
   // ids of the input parameters
   val ids = List("dv", "M", "a", "atm", "size")
+  val ids2 = List("engine", "currentM", "stageFuel")
 
   def main(): Unit = {
-    jQuery("#submit").click(solve _)
+    jQuery("#submit").click(design _)
+    jQuery("#submit2").click(ops _)
 
     val sizes = implicitly[Adapters].adapters.map(_.upper.name).distinct
     populate("size", sizes)
 
+    val engines = implicitly[Engines].engines.map(_.name).sorted
+    populate("engine", engines)
+
     loadParams(ids)
+    loadParams(ids2)
   }
 
-  def solve(): Unit = {
+  def design(): Unit = {
     jQuery("#spinner").show()
     jQuery("#results").empty()
 
@@ -40,6 +46,33 @@ object SolverJsApp extends JSApp
     } finally {
       jQuery("#spinner").hide()
     }
+  }
+
+  def ops(): Unit = {
+    jQuery("#spinner2").show()
+    jQuery("#results2").empty()
+
+    try {
+      val params = getParams(ids2)
+      val input = ids2.map(params(_))
+
+      val engine = Engines.fromName(input(0)).get
+      val mass = input(1).toDouble
+      val fuelMass = engine.fuel.toTonnes(input(2).toDouble)
+
+      val engines = 1 // irrelevant
+      val tank = FixedFuelTank("Unknown", engine.fuel, engine.mount, 0, 0, 0, fuelMass)
+      val soln = EngineSolution(mass, engine, engines, tank, fuelMass, false, Nil)
+
+      jQuery("#results2").append(
+        f"<p>remaining Δv = ${soln.totalDeltaV}%1.0f</p>"
+      )
+
+      persistParams(params)
+    } finally {
+      jQuery("#spinner2").hide()
+    }
+
   }
 
   private def optLink(name: String, wikiName: Option[String]) =
