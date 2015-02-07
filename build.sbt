@@ -16,7 +16,7 @@ lazy val sharedSettings = Seq(
   ),
   unmanagedSourceDirectories in Compile += baseDirectory.value / "../shared/src/main/scala",
   unmanagedSourceDirectories in Test += baseDirectory.value / "../shared/src/test/scala",
-  libraryDependencies += "com.lihaoyi" %%% "utest" % "0.2.5-RC1" % "test",
+  libraryDependencies += "com.lihaoyi" %%% "utest" % "0.3.0" % "test",
   testFrameworks += uTestFramework,
   // WORKAROUND https://github.com/lihaoyi/utest/issues/50
   testOptions in Test += Tests.Argument(uTestFramework, "--color=false")
@@ -36,8 +36,8 @@ lazy val js = project.in(file("js"))
       Resolver.ivyStylePatterns
     ),
     libraryDependencies ++= Seq(
-      "be.doeraene" %%% "scalajs-jquery" % "0.7.0",
-      "com.lihaoyi" %%% "scalatags" % "0.4.3-RC1"
+      "be.doeraene" %%% "scalajs-jquery" % "0.8.0",
+      "com.lihaoyi" %%% "scalatags" % "0.4.5"
     )
   )
 
@@ -45,7 +45,7 @@ lazy val jvm = project.in(file("jvm"))
   .settings(sharedSettings: _*)
   .settings(
     libraryDependencies ++= Seq(
-      "org.scalatest" %% "scalatest" % "2.2.3" % "test"
+      "org.scalatest" %% "scalatest" % "2.2.4" % "test"
     )
   )
 
