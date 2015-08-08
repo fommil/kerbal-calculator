@@ -4,7 +4,7 @@ import utest._
 
 object EngineSuite extends utest.TestSuite {
   val poodle = Engines.Stock.engines.find(_.name.contains("Poodle")).get
-  val kr1x2 = Engines.Stock.engines.find(_.name.contains("KR-1x2")).get
+  val kr1x2 = Engines.Stock.engines.find(_.name.contains("Twin-Boar")).get
 
   val largeLiquidTanks = FuelTanks.Stock.tanks.filter { tank =>
     tank.mount == Large && tank.fuel == Liquid
