@@ -15,7 +15,7 @@ object Mount {
     for {
       adapter <- all.adapters
       mount <- List(adapter.upper, adapter.lower)
-      if mount.name.equals(name)
+      if mount.name.startsWith(name)
     } yield mount
   }.headOption
 }

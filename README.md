@@ -19,7 +19,7 @@ The calculator is available at [http://fommil.github.io/kerbal](http://fommil.gi
 To use, clone and run like so
 
 ```scala
-sbt "run 1200 10 50 false Large"
+sbt "run-main Solve 1200 10 50 false Large"
 ```
 
 (You'll need [sbt](http://www.scala-sbt.org/download.html) and a Java Runtime)
