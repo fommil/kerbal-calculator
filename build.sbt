@@ -1,6 +1,6 @@
 lazy val uTestFramework = new TestFramework("utest.runner.Framework")
 
-lazy val sharedSettings = Seq(
+lazy val sharedSettings = scalariformSettings ++ Seq(
   organization := "com.github.fommil",
   name := "kerbal",
   version := "1.0-SNAPSHOT",

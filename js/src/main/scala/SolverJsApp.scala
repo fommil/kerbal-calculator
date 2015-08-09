@@ -8,9 +8,9 @@ import fommil.js._
 import fommil.kerbal._
 
 object SolverJsApp extends JSApp
-  with CookieSupport
-  with InputFormSupport
-  with PersistentInputFormSupport {
+    with CookieSupport
+    with InputFormSupport
+    with PersistentInputFormSupport {
 
   // ids of the input parameters
   val ids = List("dv", "M", "a", "atm", "size")
