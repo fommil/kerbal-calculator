@@ -11,11 +11,11 @@ object EngineSuite extends utest.TestSuite {
   }.toSet
 
   def tests = TestSuite {
-    "should return valid fuel tanks for the Poodle engine"-{
+    "should return valid fuel tanks for the Poodle engine" - {
       assert(poodle.validTanks == largeLiquidTanks)
     }
 
-    "should return valid fuel tanks for the KR-1x2 engine"-{
+    "should return valid fuel tanks for the KR-1x2 engine" - {
       // it has an internal engine, but that is obtained separately
       assert(kr1x2.validTanks == largeLiquidTanks)
     }

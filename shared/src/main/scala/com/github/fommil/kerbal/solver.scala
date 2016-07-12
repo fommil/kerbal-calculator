@@ -9,13 +9,13 @@ import math.log
  * @param mass of fuel (kKg)
  */
 case class EngineSolution(
-  payloadMass: Double,
-  engine: Engine,
-  numberOfEngines: Int,
-  tank: FuelTank,
-  fuelMass: Double,
-  atmosphere: Boolean,
-  adapters: List[Adapter]
+    payloadMass: Double,
+    engine: Engine,
+    numberOfEngines: Int,
+    tank: FuelTank,
+    fuelMass: Double,
+    atmosphere: Boolean,
+    adapters: List[Adapter]
 ) {
   require(fuelMass > 0 && fuelMass <= tank.max)
   require(adapters.size <= 2)

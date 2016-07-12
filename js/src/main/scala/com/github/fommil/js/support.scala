@@ -1,8 +1,8 @@
 package com.github.fommil.js
 
-import scalatags.Text.all._
-import org.scalajs.jquery.jQuery
 import org.scalajs.dom
+import org.scalajs.jquery.jQuery
+import scalatags.Text.all._
 
 /**
  * Chrome doesn't allow reading or writing of cookies when served
@@ -32,7 +32,7 @@ trait InputFormSupport {
   private def getElement(id: String) = {
     val el = jQuery("#" + id)
     val tag = el.prop("tagName").toString.toLowerCase
-    val `type` = el.attr("type")
+    val `type` = el.attr("type").toOption
     (el, tag, `type`)
   }
 
@@ -44,7 +44,7 @@ trait InputFormSupport {
   }
 
   protected def getParam(id: String): String = getElement(id) match {
-    case (el, "input", "checkbox") => el.is(":checked").toString
+    case (el, "input", Some("checkbox")) => el.is(":checked").toString
     case (el, "input", _) => el.value().toString
     case (el, "select", _) => el.value().toString
     case other => throw new UnsupportedOperationException(s"$other")
@@ -58,8 +58,8 @@ trait InputFormSupport {
   }.toMap
 
   protected def setParam(id: String, value: String) = getElement(id) match {
-    case (el, "input", "checkbox") if value.toBoolean => el.attr("checked", true)
-    case (el, "input", "checkbox") => el.attr("checked", false)
+    case (el, "input", Some("checkbox")) if value.toBoolean => el.attr("checked", true)
+    case (el, "input", Some("checkbox")) => el.attr("checked", false)
     case (el, "input", _) => el.attr("value", value)
     case (el, "select", _) =>
       val all = jQuery(s"""#$id option""").removeAttr("selected")

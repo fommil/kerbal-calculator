@@ -45,15 +45,15 @@ sealed trait FuelTank {
  * @param unique is only one allowed
  */
 case class FixedFuelTank(
-  name: String,
-  fuel: Fuel,
-  mount: Mount,
-  baseCost: Double,
-  fullCost: Double,
-  emptyMass: Double,
-  fullMass: Double,
-  unique: Boolean = false,
-  wiki: Option[String] = None
+    name: String,
+    fuel: Fuel,
+    mount: Mount,
+    baseCost: Double,
+    fullCost: Double,
+    emptyMass: Double,
+    fullMass: Double,
+    unique: Boolean = false,
+    wiki: Option[String] = None
 ) extends FuelTank {
   require(fullMass > 0, name)
   require(emptyMass >= 0, name)

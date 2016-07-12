@@ -4,10 +4,9 @@ lazy val sharedSettings = scalariformSettings ++ Seq(
   organization := "com.github.fommil",
   name := "kerbal",
   version := "1.0-SNAPSHOT",
-  scalaVersion := "2.11.7",
+  scalaVersion := "2.11.8",
   scalacOptions in Compile ++= Seq(
     "-encoding", "UTF-8",
-    "-target:jvm-1.6",
     "-feature",
     "-deprecation",
     "-Xfatal-warnings",
@@ -16,7 +15,7 @@ lazy val sharedSettings = scalariformSettings ++ Seq(
   ),
   unmanagedSourceDirectories in Compile += baseDirectory.value / "../shared/src/main/scala",
   unmanagedSourceDirectories in Test += baseDirectory.value / "../shared/src/test/scala",
-  libraryDependencies += "com.lihaoyi" %%% "utest" % "0.3.1" % "test",
+  libraryDependencies += "com.lihaoyi" %%% "utest" % "0.4.3" % "test",
   testFrameworks += uTestFramework,
   // WORKAROUND https://github.com/lihaoyi/utest/issues/50
   testOptions in Test += Tests.Argument(uTestFramework, "--color=false")
@@ -36,8 +35,8 @@ lazy val js = project.in(file("js"))
       Resolver.ivyStylePatterns
     ),
     libraryDependencies ++= Seq(
-      "be.doeraene" %%% "scalajs-jquery" % "0.8.0",
-      "com.lihaoyi" %%% "scalatags" % "0.5.2"
+      "be.doeraene" %%% "scalajs-jquery" % "0.9.0",
+      "com.lihaoyi" %%% "scalatags" % "0.5.5"
     )
   )
 
@@ -45,7 +44,7 @@ lazy val jvm = project.in(file("jvm"))
   .settings(sharedSettings: _*)
   .settings(
     libraryDependencies ++= Seq(
-      "org.scalatest" %% "scalatest" % "2.2.5" % "test"
+      "org.scalatest" %% "scalatest" % "2.2.6" % "test"
     )
   )
 

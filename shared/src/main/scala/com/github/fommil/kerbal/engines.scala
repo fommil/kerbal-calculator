@@ -54,16 +54,16 @@ object Radial extends (List[Int] => Radial) {
  * @loaded internal for engines with an internal fuel tank (kKg)
  */
 case class Engine(
-  name: String,
-  mount: Mount,
-  cost: Double,
-  mass: Double,
-  thrust: Double,
-  ispAtm: Double,
-  ispVac: Double,
-  fuel: Fuel,
-  internal: Option[FuelTank] = None,
-  wiki: Option[String] = None
+    name: String,
+    mount: Mount,
+    cost: Double,
+    mass: Double,
+    thrust: Double,
+    ispAtm: Double,
+    ispVac: Double,
+    fuel: Fuel,
+    internal: Option[FuelTank] = None,
+    wiki: Option[String] = None
 ) {
   /** Effective exhaust velocity (atmosphere). */
   def veAtm: Double = Kerbin.g * ispAtm
@@ -140,12 +140,12 @@ object Engines {
 }
 
 case class Adapter(
-  name: String,
-  upper: Mount,
-  lower: Mount,
-  mass: Double,
-  cost: Double,
-  wiki: Option[String] = None
+    name: String,
+    upper: Mount,
+    lower: Mount,
+    mass: Double,
+    cost: Double,
+    wiki: Option[String] = None
 ) {
   require(upper != lower, "useless converter")
   def reverse = Adapter(name, lower, upper, mass, cost, wiki)
