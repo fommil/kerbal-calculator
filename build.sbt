@@ -36,7 +36,7 @@ lazy val js = project.in(file("js"))
     ),
     libraryDependencies ++= Seq(
       "be.doeraene" %%% "scalajs-jquery" % "0.9.0",
-      "com.lihaoyi" %%% "scalatags" % "0.5.5"
+      "com.lihaoyi" %%% "scalatags" % "0.6.0"
     )
   )
 
