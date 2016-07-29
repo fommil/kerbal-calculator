@@ -74,8 +74,10 @@ case class FixedFuelTank(
 
 class FuelTanks(val tanks: List[FuelTank])
 object FuelTanks {
-  // as of 2015-08-08
+  // as of 2016-07-29
   // http://wiki.kerbalspaceprogram.com/wiki/Parts#Fuel_Tanks
+  // note that the wiki history is broken, so copy/paste the relevant text and diff -w
+  // http://web.archive.org/web/20160601000000*/http://wiki.kerbalspaceprogram.com/wiki/Parts
   implicit val Stock = new FuelTanks(List(
     // Liquid
     FixedFuelTank("ROUND-8 Toroidal", Liquid, Tiny, 147.46, 175, 0.0375, 0.3375, wiki = Some("ROUND-8_Toroidal_Fuel_Tank")),

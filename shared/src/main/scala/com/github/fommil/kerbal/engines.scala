@@ -94,8 +94,10 @@ object Engine {
 
 class Engines(val engines: List[Engine])
 object Engines {
-  // as of 2015-08-08
+  // as of 2015-07-29
   // http://wiki.kerbalspaceprogram.com/wiki/Parts#Engines
+  // note that the wiki history is broken, so copy/paste the relevant text and diff -w
+  // http://web.archive.org/web/20160601000000*/http://wiki.kerbalspaceprogram.com/wiki/Parts
   implicit val Stock = new Engines(List(
     // Liquid Engines
     Engine("Spider", Radial(4, 6, 8, 12), 120, 0.02, 2, 260, 290, Liquid, wiki = Some("""LV-1R_"Spider"_Liquid_Fuel_Engine""")),
@@ -107,8 +109,9 @@ object Engines {
     Engine("Terrier", Small, 390, 0.5, 60, 85, 345, Liquid, wiki = Some("""LV-909_"Terrier"_Liquid_Fuel_Engine""")),
     Engine("Reliant", Small, 1100, 1.25, 215, 280, 300, Liquid, wiki = Some("""LV-T30_"Reliant"_Liquid_Fuel_Engine""")),
     Engine("Swivel", Small, 1200, 1.5, 200, 270, 320, Liquid, wiki = Some("""LV-T45_"Swivel"_Liquid_Fuel_Engine""")),
+    Engine("Vector", Small, 18000, 4.0, 1000, 295, 315, Liquid, wiki = Some("""S3_KS-25_"Vector"_Liquid_Fuel_Engine""")),
     Engine("Rapier (Liquid)", Small, 6000, 2, 180, 275, 305, Liquid, wiki = Some("""CR-7_R.A.P.I.E.R._Engine""")),
-    Engine("Aerospike", Small, 3850, 1, 180, 290, 340, Liquid, wiki = Some("""T-1_Toroidal_"Aerospike"_Liquid_Fuel_Engine""")),
+    Engine("Dart", Small, 3850, 1, 180, 290, 340, Liquid, wiki = Some("""T-1_Toroidal_Aerospike_"Dart"_Liquid_Fuel_Engine""")),
     Engine("Nerv", Small, 10000, 3, 60, 185, 800, Liquid, wiki = Some("""LV-N_"Nerv"_Atomic_Rocket_Motor""")),
     Engine("Poodle", Large, 1300, 1.75, 250, 90, 350, Liquid, wiki = Some("""RE-L10_"Poodle"_Liquid_Fuel_Engine""")),
     Engine("Skipper", Large, 5300, 3, 650, 280, 320, Liquid, wiki = Some("""RE-I5_"Skipper"_Liquid_Fuel_Engine""")),
