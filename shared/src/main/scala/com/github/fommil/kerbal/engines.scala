@@ -103,6 +103,8 @@ object Engines {
     Engine("Spider", Radial(4, 6, 8, 12), 120, 0.02, 2, 260, 290, Liquid, wiki = Some("""LV-1R_"Spider"_Liquid_Fuel_Engine""")),
     Engine("Twitch", Radial(2, 4, 6, 8), 400, 0.09, 16, 250, 290, Liquid, wiki = Some("""24-77_"Twitch"_Liquid_Fuel_Engine""")),
     Engine("Thud", Radial(0, 2, 4, 6), 820, 0.9, 120, 275, 305, Liquid, wiki = Some("""Mk-55_"Thud"_Liquid_Fuel_Engine""")),
+    Engine("Thruster Block", Radial(1, 2, 3, 4), 620, 0.05, 1, 100, 240, Mono, wiki = Some("""http://wiki.kerbalspaceprogram.com/wiki/RV-105_RCS_Thruster_Block""")),
+    Engine("Place Anywhere", Radial(1, 2, 3, 4), 280, 0.03, 2, 100, 240, Mono, wiki = Some("""Place-Anywhere_7_Linear_RCS_Port""")),
     Engine("Puff", Radial(4, 6, 8, 12), 150, 0.09, 20, 120, 250, Mono, wiki = Some("""O-10_"Puff"_MonoPropellant_Fuel_Engine""")),
     Engine("Ant", Tiny, 110, 0.02, 2, 80, 315, Liquid, wiki = Some("""LV-1_"Ant"_Liquid_Fuel_Engine""")),
     Engine("Spark", Tiny, 200, 0.1, 18, 270, 300, Liquid, wiki = Some("""48-7S_"Spark"_Liquid_Fuel_Engine""")),
