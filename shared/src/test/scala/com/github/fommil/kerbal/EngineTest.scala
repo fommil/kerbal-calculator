@@ -2,7 +2,7 @@ package com.github.fommil.kerbal
 
 import org.scalatest._
 
-object EngineTest extends WordSpec {
+class EngineTest extends WordSpec {
   val poodle = Engines.Stock.engines.find(_.name.contains("Poodle")).get
   val kr1x2 = Engines.Stock.engines.find(_.name.contains("Twin-Boar")).get
 

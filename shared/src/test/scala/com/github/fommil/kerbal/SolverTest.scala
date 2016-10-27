@@ -2,7 +2,7 @@ package com.github.fommil.kerbal
 
 import org.scalatest._
 
-object SolverTest extends WordSpec {
+class SolverTest extends WordSpec {
 
   private def bestEngines(solns: Stream[EngineSolution]): Set[String] =
     solns.sortBy(_.stageInitialMass).take(20).map(_.engine.name).toSet
