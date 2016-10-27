@@ -1,10 +1,10 @@
-lazy val uTestFramework = new TestFramework("utest.runner.Framework")
-
 organization in ThisBuild := "com.github.fommil"
 version in ThisBuild := "1.0-SNAPSHOT"
 scalaVersion in ThisBuild := "2.11.8"
 
-scalacOptions in Compile ++= Seq(
+val scalatestVersion = "3.0.0"
+
+scalacOptions ++= Seq(
   "-encoding", "UTF-8",
   "-feature",
   "-deprecation",
@@ -15,11 +15,7 @@ scalacOptions in Compile ++= Seq(
 
 lazy val sharedSettings = scalariformSettings ++ Seq(
   unmanagedSourceDirectories in Compile += baseDirectory.value / "../shared/src/main/scala",
-  unmanagedSourceDirectories in Test += baseDirectory.value / "../shared/src/test/scala",
-  libraryDependencies += "com.lihaoyi" %%% "utest" % "0.4.4" % "test",
-  testFrameworks += uTestFramework,
-  // WORKAROUND https://github.com/lihaoyi/utest/issues/50
-  testOptions in Test += Tests.Argument(uTestFramework, "--color=false")
+  unmanagedSourceDirectories in Test += baseDirectory.value / "../shared/src/test/scala"
 )
 
 lazy val js = project.in(file("js"))
@@ -37,7 +33,8 @@ lazy val js = project.in(file("js"))
     ),
     libraryDependencies ++= Seq(
       "be.doeraene" %%% "scalajs-jquery" % "0.9.0",
-      "com.lihaoyi" %%% "scalatags" % "0.6.2"
+      "com.lihaoyi" %%% "scalatags" % "0.6.2",
+      "org.scalatest" %%% "scalatest" % scalatestVersion % "test"
     )
   )
 
@@ -45,7 +42,7 @@ lazy val jvm = project.in(file("jvm"))
   .settings(sharedSettings: _*)
   .settings(
     libraryDependencies ++= Seq(
-      "org.scalatest" %% "scalatest" % "3.0.0" % "test"
+      "org.scalatest" %% "scalatest" % scalatestVersion % "test"
     )
   )
 
