@@ -1,6 +1,6 @@
 organization in ThisBuild := "com.github.fommil"
 version in ThisBuild := "1.0-SNAPSHOT"
-scalaVersion in ThisBuild := "2.11.8"
+scalaVersion in ThisBuild := "2.11.11"
 
 val scalatestVersion = "3.0.0"
 
