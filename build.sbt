@@ -1,8 +1,8 @@
 organization in ThisBuild := "com.github.fommil"
 version in ThisBuild := "1.0-SNAPSHOT"
-scalaVersion in ThisBuild := "2.11.11"
+scalaVersion in ThisBuild := "2.12.2"
 
-val scalatestVersion = "3.0.0"
+val scalatestVersion = "3.0.3"
 
 scalacOptions ++= Seq(
   "-encoding", "UTF-8",
@@ -32,8 +32,8 @@ lazy val js = project.in(file("js"))
       Resolver.ivyStylePatterns
     ),
     libraryDependencies ++= Seq(
-      "be.doeraene" %%% "scalajs-jquery" % "0.9.0",
-      "com.lihaoyi" %%% "scalatags" % "0.6.2",
+      "be.doeraene" %%% "scalajs-jquery" % "0.9.2",
+      "com.lihaoyi" %%% "scalatags" % "0.6.5",
       "org.scalatest" %%% "scalatest" % scalatestVersion % "test"
     )
   )

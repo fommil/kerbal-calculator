@@ -17,9 +17,9 @@ before_install:
 - git config --global user.name "Sam Halliday (Travis)"
 - git config --global push.default simple
 script:
-- sbt ++$TRAVIS_SCALA_VERSION clean test
+- sbt clean test
 after_success:
-- sbt ++$TRAVIS_SCALA_VERSION clean fullOptJS
+- sbt clean fullOptJS
 - git clone git@github.com:fommil/fommil.github.io
 - cp -L index.html kerbal-opt.js fommil.github.io/kerbal
 - cd fommil.github.io
