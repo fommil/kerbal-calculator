@@ -1,0 +1,623 @@
+HTTP/1.1 200 OK
+Server: GitHub.com
+Date: Sun, 17 Sep 2017 11:15:21 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 26974
+Status: 200 OK
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 4
+X-RateLimit-Reset: 1505648180
+Cache-Control: public, max-age=60, s-maxage=60
+Vary: Accept
+ETag: "223f37c4b514994b8721252411d2e3a4"
+X-GitHub-Media-Type: github.v3; format=json
+Access-Control-Expose-Headers: ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+Access-Control-Allow-Origin: *
+Content-Security-Policy: default-src 'none'
+Strict-Transport-Security: max-age=31536000; includeSubdomains; preload
+X-Content-Type-Options: nosniff
+X-Frame-Options: deny
+X-XSS-Protection: 1; mode=block
+X-Runtime-rack: 0.085563
+X-GitHub-Request-Id: 6766:5C3B:5944B8A:CCF3F5F:59BE5948
+
+[
+  {
+    "url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/26",
+    "repository_url": "https://api.github.com/repos/fommil/kerbal-calculator",
+    "labels_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/26/labels{/name}",
+    "comments_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/26/comments",
+    "events_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/26/events",
+    "html_url": "https://github.com/fommil/kerbal-calculator/issues/26",
+    "id": 241473523,
+    "number": 26,
+    "title": "orbital transfers",
+    "user": {
+      "login": "fommil",
+      "id": 1914041,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1914041?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fommil",
+      "html_url": "https://github.com/fommil",
+      "followers_url": "https://api.github.com/users/fommil/followers",
+      "following_url": "https://api.github.com/users/fommil/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fommil/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fommil/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fommil/subscriptions",
+      "organizations_url": "https://api.github.com/users/fommil/orgs",
+      "repos_url": "https://api.github.com/users/fommil/repos",
+      "events_url": "https://api.github.com/users/fommil/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fommil/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2017-07-08T19:06:35Z",
+    "updated_at": "2017-07-08T19:06:35Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "the current orbital transfer code https://alexmoon.github.io/ksp/ uses a non-free license."
+  },
+  {
+    "url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/24",
+    "repository_url": "https://api.github.com/repos/fommil/kerbal-calculator",
+    "labels_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/24/labels{/name}",
+    "comments_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/24/comments",
+    "events_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/24/events",
+    "html_url": "https://github.com/fommil/kerbal-calculator/issues/24",
+    "id": 240639242,
+    "number": 24,
+    "title": "auto generate data by parsing GameData",
+    "user": {
+      "login": "fommil",
+      "id": 1914041,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1914041?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fommil",
+      "html_url": "https://github.com/fommil",
+      "followers_url": "https://api.github.com/users/fommil/followers",
+      "following_url": "https://api.github.com/users/fommil/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fommil/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fommil/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fommil/subscriptions",
+      "organizations_url": "https://api.github.com/users/fommil/orgs",
+      "repos_url": "https://api.github.com/users/fommil/repos",
+      "events_url": "https://api.github.com/users/fommil/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fommil/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2017-07-05T12:46:42Z",
+    "updated_at": "2017-07-05T12:46:42Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "would need to be an sbt plugin"
+  },
+  {
+    "url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/23",
+    "repository_url": "https://api.github.com/repos/fommil/kerbal-calculator",
+    "labels_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/23/labels{/name}",
+    "comments_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/23/comments",
+    "events_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/23/events",
+    "html_url": "https://github.com/fommil/kerbal-calculator/issues/23",
+    "id": 240638416,
+    "number": 23,
+    "title": "parachute calculator",
+    "user": {
+      "login": "fommil",
+      "id": 1914041,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1914041?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fommil",
+      "html_url": "https://github.com/fommil",
+      "followers_url": "https://api.github.com/users/fommil/followers",
+      "following_url": "https://api.github.com/users/fommil/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fommil/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fommil/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fommil/subscriptions",
+      "organizations_url": "https://api.github.com/users/fommil/orgs",
+      "repos_url": "https://api.github.com/users/fommil/repos",
+      "events_url": "https://api.github.com/users/fommil/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fommil/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2017-07-05T12:43:25Z",
+    "updated_at": "2017-07-05T12:43:25Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "https://web-beta.archive.org/web/20161225235749/http://ksp.freeiz.com//"
+  },
+  {
+    "url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/21",
+    "repository_url": "https://api.github.com/repos/fommil/kerbal-calculator",
+    "labels_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/21/labels{/name}",
+    "comments_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/21/comments",
+    "events_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/21/events",
+    "html_url": "https://github.com/fommil/kerbal-calculator/issues/21",
+    "id": 196215730,
+    "number": 21,
+    "title": "generate science biome grid",
+    "user": {
+      "login": "fommil",
+      "id": 1914041,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1914041?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fommil",
+      "html_url": "https://github.com/fommil",
+      "followers_url": "https://api.github.com/users/fommil/followers",
+      "following_url": "https://api.github.com/users/fommil/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fommil/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fommil/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fommil/subscriptions",
+      "organizations_url": "https://api.github.com/users/fommil/orgs",
+      "repos_url": "https://api.github.com/users/fommil/repos",
+      "events_url": "https://api.github.com/users/fommil/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fommil/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2016-12-17T10:45:01Z",
+    "updated_at": "2016-12-17T10:45:01Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "I hand craft lists of planet/biome/experiment to know what to do. It would be good to auto generate from the save file."
+  },
+  {
+    "url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/19",
+    "repository_url": "https://api.github.com/repos/fommil/kerbal-calculator",
+    "labels_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/19/labels{/name}",
+    "comments_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/19/comments",
+    "events_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/19/events",
+    "html_url": "https://github.com/fommil/kerbal-calculator/issues/19",
+    "id": 99845355,
+    "number": 19,
+    "title": "use scalatest",
+    "user": {
+      "login": "fommil",
+      "id": 1914041,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1914041?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fommil",
+      "html_url": "https://github.com/fommil",
+      "followers_url": "https://api.github.com/users/fommil/followers",
+      "following_url": "https://api.github.com/users/fommil/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fommil/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fommil/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fommil/subscriptions",
+      "organizations_url": "https://api.github.com/users/fommil/orgs",
+      "repos_url": "https://api.github.com/users/fommil/repos",
+      "events_url": "https://api.github.com/users/fommil/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fommil/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2015-08-08T23:53:16Z",
+    "updated_at": "2015-08-08T23:53:16Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "now that it is supposed to work in scalajs\n"
+  },
+  {
+    "url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/16",
+    "repository_url": "https://api.github.com/repos/fommil/kerbal-calculator",
+    "labels_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/16/labels{/name}",
+    "comments_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/16/comments",
+    "events_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/16/events",
+    "html_url": "https://github.com/fommil/kerbal-calculator/issues/16",
+    "id": 54668094,
+    "number": 16,
+    "title": "let user order by column",
+    "user": {
+      "login": "fommil",
+      "id": 1914041,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1914041?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fommil",
+      "html_url": "https://github.com/fommil",
+      "followers_url": "https://api.github.com/users/fommil/followers",
+      "following_url": "https://api.github.com/users/fommil/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fommil/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fommil/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fommil/subscriptions",
+      "organizations_url": "https://api.github.com/users/fommil/orgs",
+      "repos_url": "https://api.github.com/users/fommil/repos",
+      "events_url": "https://api.github.com/users/fommil/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fommil/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2015-01-17T17:20:41Z",
+    "updated_at": "2015-01-17T17:20:41Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "Sometimes I want to pick the cheapest option and I'd like to order by that instead.\n"
+  },
+  {
+    "url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/15",
+    "repository_url": "https://api.github.com/repos/fommil/kerbal-calculator",
+    "labels_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/15/labels{/name}",
+    "comments_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/15/comments",
+    "events_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/15/events",
+    "html_url": "https://github.com/fommil/kerbal-calculator/issues/15",
+    "id": 54666725,
+    "number": 15,
+    "title": "fuel filters",
+    "user": {
+      "login": "fommil",
+      "id": 1914041,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1914041?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fommil",
+      "html_url": "https://github.com/fommil",
+      "followers_url": "https://api.github.com/users/fommil/followers",
+      "following_url": "https://api.github.com/users/fommil/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fommil/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fommil/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fommil/subscriptions",
+      "organizations_url": "https://api.github.com/users/fommil/orgs",
+      "repos_url": "https://api.github.com/users/fommil/repos",
+      "events_url": "https://api.github.com/users/fommil/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fommil/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2015-01-17T16:38:28Z",
+    "updated_at": "2015-01-17T16:38:28Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "sometimes it is useful to only see solutions with a certain fuel type, e.g. if they are going to be part of a re-usable or refillable station part.\n"
+  },
+  {
+    "url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/11",
+    "repository_url": "https://api.github.com/repos/fommil/kerbal-calculator",
+    "labels_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/11/labels{/name}",
+    "comments_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/11/comments",
+    "events_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/11/events",
+    "html_url": "https://github.com/fommil/kerbal-calculator/issues/11",
+    "id": 54629249,
+    "number": 11,
+    "title": "mass/cost penalty for radial parts",
+    "user": {
+      "login": "fommil",
+      "id": 1914041,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1914041?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fommil",
+      "html_url": "https://github.com/fommil",
+      "followers_url": "https://api.github.com/users/fommil/followers",
+      "following_url": "https://api.github.com/users/fommil/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fommil/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fommil/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fommil/subscriptions",
+      "organizations_url": "https://api.github.com/users/fommil/orgs",
+      "repos_url": "https://api.github.com/users/fommil/repos",
+      "events_url": "https://api.github.com/users/fommil/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fommil/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2015-01-16T21:49:15Z",
+    "updated_at": "2015-01-16T21:49:15Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "When using FAR, one might need to add an additional fairing to cover radially mounted parts, so we should penalise them with to account for the larger fairing needed.\n\nThis is a minor concern because when using FAR, the fairing will be disposed when burning... so the user just needs to remember to add the cost to the stage before.\n"
+  },
+  {
+    "url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/10",
+    "repository_url": "https://api.github.com/repos/fommil/kerbal-calculator",
+    "labels_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/10/labels{/name}",
+    "comments_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/10/comments",
+    "events_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/10/events",
+    "html_url": "https://github.com/fommil/kerbal-calculator/issues/10",
+    "id": 54620969,
+    "number": 10,
+    "title": "support multi-adapters",
+    "user": {
+      "login": "fommil",
+      "id": 1914041,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1914041?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fommil",
+      "html_url": "https://github.com/fommil",
+      "followers_url": "https://api.github.com/users/fommil/followers",
+      "following_url": "https://api.github.com/users/fommil/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fommil/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fommil/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fommil/subscriptions",
+      "organizations_url": "https://api.github.com/users/fommil/orgs",
+      "repos_url": "https://api.github.com/users/fommil/repos",
+      "events_url": "https://api.github.com/users/fommil/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fommil/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2015-01-16T20:25:52Z",
+    "updated_at": "2015-01-16T20:25:52Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "Currently only the adapters that link 1 item to 1 other are supported. It might be interesting to consider the 1 to many adapters (we'd need to allow more than one tank, and normal linear engines could be parallelised)\n\nhttp://wiki.kerbalspaceprogram.com/wiki/Adapter\n"
+  },
+  {
+    "url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/9",
+    "repository_url": "https://api.github.com/repos/fommil/kerbal-calculator",
+    "labels_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/9/labels{/name}",
+    "comments_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/9/comments",
+    "events_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/9/events",
+    "html_url": "https://github.com/fommil/kerbal-calculator/issues/9",
+    "id": 54616641,
+    "number": 9,
+    "title": "consider radial tanks with radial engines",
+    "user": {
+      "login": "fommil",
+      "id": 1914041,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1914041?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fommil",
+      "html_url": "https://github.com/fommil",
+      "followers_url": "https://api.github.com/users/fommil/followers",
+      "following_url": "https://api.github.com/users/fommil/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fommil/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fommil/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fommil/subscriptions",
+      "organizations_url": "https://api.github.com/users/fommil/orgs",
+      "repos_url": "https://api.github.com/users/fommil/repos",
+      "events_url": "https://api.github.com/users/fommil/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fommil/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2015-01-16T19:46:08Z",
+    "updated_at": "2015-01-16T19:46:08Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "might be useful for very small satellites\n"
+  },
+  {
+    "url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/5",
+    "repository_url": "https://api.github.com/repos/fommil/kerbal-calculator",
+    "labels_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/5/labels{/name}",
+    "comments_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/5/comments",
+    "events_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/5/events",
+    "html_url": "https://github.com/fommil/kerbal-calculator/issues/5",
+    "id": 54378249,
+    "number": 5,
+    "title": "spaceplane tanks",
+    "user": {
+      "login": "fommil",
+      "id": 1914041,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1914041?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fommil",
+      "html_url": "https://github.com/fommil",
+      "followers_url": "https://api.github.com/users/fommil/followers",
+      "following_url": "https://api.github.com/users/fommil/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fommil/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fommil/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fommil/subscriptions",
+      "organizations_url": "https://api.github.com/users/fommil/orgs",
+      "repos_url": "https://api.github.com/users/fommil/repos",
+      "events_url": "https://api.github.com/users/fommil/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fommil/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2015-01-14T21:21:01Z",
+    "updated_at": "2015-01-14T21:21:01Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "currently not included in the list. would be an easy add.\n"
+  },
+  {
+    "url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/4",
+    "repository_url": "https://api.github.com/repos/fommil/kerbal-calculator",
+    "labels_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/4/labels{/name}",
+    "comments_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/4/comments",
+    "events_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/4/events",
+    "html_url": "https://github.com/fommil/kerbal-calculator/issues/4",
+    "id": 54378135,
+    "number": 4,
+    "title": "jet engines",
+    "user": {
+      "login": "fommil",
+      "id": 1914041,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1914041?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fommil",
+      "html_url": "https://github.com/fommil",
+      "followers_url": "https://api.github.com/users/fommil/followers",
+      "following_url": "https://api.github.com/users/fommil/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fommil/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fommil/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fommil/subscriptions",
+      "organizations_url": "https://api.github.com/users/fommil/orgs",
+      "repos_url": "https://api.github.com/users/fommil/repos",
+      "events_url": "https://api.github.com/users/fommil/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fommil/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2015-01-14T21:20:01Z",
+    "updated_at": "2015-01-14T21:20:08Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "currently not supported at all (except the liquid stage of the ~~Sabre~~ Rapier)\n"
+  },
+  {
+    "url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/3",
+    "repository_url": "https://api.github.com/repos/fommil/kerbal-calculator",
+    "labels_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/3/labels{/name}",
+    "comments_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/3/comments",
+    "events_url": "https://api.github.com/repos/fommil/kerbal-calculator/issues/3/events",
+    "html_url": "https://github.com/fommil/kerbal-calculator/issues/3",
+    "id": 54378073,
+    "number": 3,
+    "title": "procedural parts",
+    "user": {
+      "login": "fommil",
+      "id": 1914041,
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1914041?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fommil",
+      "html_url": "https://github.com/fommil",
+      "followers_url": "https://api.github.com/users/fommil/followers",
+      "following_url": "https://api.github.com/users/fommil/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fommil/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fommil/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fommil/subscriptions",
+      "organizations_url": "https://api.github.com/users/fommil/orgs",
+      "repos_url": "https://api.github.com/users/fommil/repos",
+      "events_url": "https://api.github.com/users/fommil/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fommil/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2015-01-14T21:19:25Z",
+    "updated_at": "2015-01-14T21:19:25Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "it would be good, and fairly easy, to include support for procedural engines\n\n https://github.com/Swamp-Ig/ProceduralParts/issues/101\n\nHowever, the author has said that the goal is to match the stock parts price for price and that means that I am a lot less interested in Procedural Parts as a mod because it means there is no fun trade-off between the mass gains and the cost (which should be a lot higher due to increased niche production and testing!)\n\nAnyone wanting to use Procedural Parts can just create an engine that closely matches the stock part with its partial fuel load and enjoy an additional mass/cost benefit.\n"
+  }
+]
