@@ -1,5 +1,5 @@
 ThisBuild / organization := "com.github.fommil"
-ThisBuild / scalaVersion := "2.12.15" // TODO update scala
+ThisBuild / scalaVersion := "2.13.8"
 
 val scalatestVersion = "3.2.12"
 

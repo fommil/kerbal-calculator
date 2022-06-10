@@ -1,1 +1,1 @@
-js/target/scala-2.12/js-opt/main.js
+js/target/scala-2.13/js-opt/main.js
