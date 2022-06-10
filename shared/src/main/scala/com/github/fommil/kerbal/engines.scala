@@ -92,6 +92,7 @@ object Engine {
 
 class Engines(val engines: List[Engine])
 object Engines {
+  // TODO update to latest
   // as of 2015-07-29
   // http://wiki.kerbalspaceprogram.com/wiki/Parts#Engines
   // note that the wiki history is broken, so copy/paste the relevant text and diff -w
@@ -156,6 +157,7 @@ case class Adapter(
 
 class Adapters(val adapters: List[Adapter])
 object Adapters {
+  // TODO update to latest
   val Stock = new Adapters(List(
     Adapter("FL-A10", Tiny, Small, 0.05, 150, wiki = Some("FL-A10_Adapter")),
     Adapter("Rockomax Brand", Small, Large, 0.10, 500, wiki = Some("Rockomax_Brand_Adapter")),

@@ -19,6 +19,7 @@ case object Mono extends Fuel {
 case object Xenon extends Fuel {
   def toTonnes(xe: Double) = 0.0001 * xe
 }
+// TODO LiquidOnly (for nuclear engine)
 
 sealed trait FuelTank {
   /** Human readable name */
@@ -74,6 +75,7 @@ case class FixedFuelTank(
 
 class FuelTanks(val tanks: List[FuelTank])
 object FuelTanks {
+  // TODO update to latest
   // as of 2016-07-29
   // http://wiki.kerbalspaceprogram.com/wiki/Parts#Fuel_Tanks
   // note that the wiki history is broken, so copy/paste the relevant text and diff -w
