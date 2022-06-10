@@ -1,4 +1,4 @@
-import scala.scalajs.js.JSApp
+import net.exoego.scalajs.jquery._
 import scalatags.Text.all._
 import org.scalajs.jquery.jQuery
 import org.scalajs.dom
@@ -7,8 +7,8 @@ import com.github.fommil
 import fommil.js._
 import fommil.kerbal._
 
-object SolverJsApp extends JSApp
-    with CookieSupport
+object SolverJsApp
+    extends CookieSupport
     with InputFormSupport
     with PersistentInputFormSupport {
 

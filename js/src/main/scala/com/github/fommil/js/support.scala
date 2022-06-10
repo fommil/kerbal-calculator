@@ -58,8 +58,8 @@ trait InputFormSupport {
   }.toMap
 
   protected def setParam(id: String, value: String) = getElement(id) match {
-    case (el, "input", Some("checkbox")) if value.toBoolean => el.attr("checked", true)
-    case (el, "input", Some("checkbox")) => el.attr("checked", false)
+    case (el, "input", Some("checkbox")) if value.toBoolean => el.attr("checked", "true")
+    case (el, "input", Some("checkbox")) => el.attr("checked", "false")
     case (el, "input", _) => el.attr("value", value)
     case (el, "select", _) =>
       val all = jQuery(s"""#$id option""").removeAttr("selected")

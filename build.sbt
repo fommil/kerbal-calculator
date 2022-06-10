@@ -1,8 +1,7 @@
-organization in ThisBuild := "com.github.fommil"
-version in ThisBuild := "1.0-SNAPSHOT"
-scalaVersion in ThisBuild := "2.12.2"
+ThisBuild / organization := "com.github.fommil"
+ThisBuild / scalaVersion := "2.12.15" // TODO update scala
 
-val scalatestVersion = "3.0.3"
+val scalatestVersion = "3.2.12"
 
 scalacOptions ++= Seq(
   "-encoding", "UTF-8",
@@ -13,27 +12,19 @@ scalacOptions ++= Seq(
   "-language:implicitConversions"
 )
 
-lazy val sharedSettings = scalariformSettings ++ Seq(
-  unmanagedSourceDirectories in Compile += baseDirectory.value / "../shared/src/main/scala",
-  unmanagedSourceDirectories in Test += baseDirectory.value / "../shared/src/test/scala"
+lazy val sharedSettings = Seq(
+  Compile / unmanagedSourceDirectories += baseDirectory.value / "../shared/src/main/scala",
+  Test / unmanagedSourceDirectories += baseDirectory.value / "../shared/src/test/scala"
 )
 
 lazy val js = project.in(file("js"))
   .enablePlugins(ScalaJSPlugin)
   .settings(sharedSettings: _*)
   .settings(
-    //skip in packageJSDependencies := false,
-    //scalaJSStage := FastOptStage,
-    //jsDependencies += RuntimeDOM,
-    resolvers += Resolver.url(
-      "scala-js-releases",
-      url("http://dl.bintray.com/scala-js/scala-js-releases/")
-    )(
-      Resolver.ivyStylePatterns
-    ),
     libraryDependencies ++= Seq(
-      "be.doeraene" %%% "scalajs-jquery" % "0.9.2",
-      "com.lihaoyi" %%% "scalatags" % "0.6.5",
+      "net.exoego" %%% "scalajs-jquery3" % "2.2.0",
+      "net.exoego" %%% "scalajs-jquery3-compat" % "2.2.0",
+      "com.lihaoyi" %%% "scalatags" % "0.11.1",
       "org.scalatest" %%% "scalatest" % scalatestVersion % "test"
     )
   )
