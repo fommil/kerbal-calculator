@@ -26,7 +26,8 @@ lazy val js = project.in(file("js"))
       "net.exoego" %%% "scalajs-jquery3-compat" % "2.2.0",
       "com.lihaoyi" %%% "scalatags" % "0.11.1",
       "org.scalatest" %%% "scalatest" % scalatestVersion % "test"
-    )
+    ),
+    scalaJSUseMainModuleInitializer := true
   )
 
 lazy val jvm = project.in(file("jvm"))

@@ -1,0 +1,1 @@
+js/target/scala-2.12/js-opt/main.js

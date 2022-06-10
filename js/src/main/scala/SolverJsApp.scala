@@ -16,7 +16,7 @@ object SolverJsApp
   val ids = List("dv", "M", "a", "atm", "size")
   val ids2 = List("engine", "currentM", "stageFuel")
 
-  def main(): Unit = {
+  def main(args: Array[String]): Unit = {
     jQuery("#submit").click(design _)
     jQuery("#submit2").click(ops _)
 
