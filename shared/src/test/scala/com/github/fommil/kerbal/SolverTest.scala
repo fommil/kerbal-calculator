@@ -5,6 +5,10 @@ import wordspec._
 
 class SolverTest extends AnyWordSpec {
 
+  implicit val engines: Engines = Engines.Stock
+  implicit val tanks: FuelTanks = FuelTanks.Stock
+  implicit val adapters: Adapters = Adapters.Stock
+
   private def bestEngines(solns: Stream[EngineSolution]): Set[String] =
     solns.sortBy(_.stageInitialMass).take(20).map(_.engine.name).toSet
 
@@ -22,36 +26,36 @@ class SolverTest extends AnyWordSpec {
 
     "recommend sensible engines for a 10t payload from Kerbin to the Mun" in {
       val results = Solver.solve(1200, 10, 20, false, Large)
-      val engines = bestEngines(results)
+      val best_engines = bestEngines(results)
       val expect = Set(
         "Skipper",
         "Thud",
         "Thumper (Radial)",
         "Kickback"
       )
-      assert(engines == expect)
+      assert(best_engines == expect)
     }
 
     "recommend sensible engines for a long-burn small satellite" in {
       val results = Solver.solve(1000, 1, 1, false, Tiny)
-      val engines = bestEngines(results)
+      val best_engines = bestEngines(results)
       val expect = Set(
         "Dawn",
         "Spider"
       )
-      assert(engines == expect)
+      assert(best_engines == expect)
     }
 
     "recommend radial solid boosters and lifters for a lift-off" in {
       val results = Solver.solve(1000, 50, 10, true, Large)
-      val engines = bestEngines(results)
+      val best_engines = bestEngines(results)
       val expect = Set(
         "Mainsail",
         "Twin-Boar",
         "Mammoth",
         "Rhino"
       )
-      assert(engines == expect)
+      assert(best_engines == expect)
     }
   }
 }

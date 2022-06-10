@@ -41,8 +41,6 @@ object Radial extends (List[Int] => Radial) {
 }
 
 /**
- * TODO: add atm thrust
- *
  * @param name human readable
  * @param mount kind of mounting
  * @param cost for the engine with no fuel (Funds)
@@ -98,7 +96,7 @@ object Engines {
   // http://wiki.kerbalspaceprogram.com/wiki/Parts#Engines
   // note that the wiki history is broken, so copy/paste the relevant text and diff -w
   // http://web.archive.org/web/20160601000000*/http://wiki.kerbalspaceprogram.com/wiki/Parts
-  implicit val Stock = new Engines(List(
+  val Stock = new Engines(List(
     // Liquid Engines
     Engine("Spider", Radial(4, 6, 8, 12), 120, 0.02, 2, 260, 290, Liquid, wiki = Some("""LV-1R_"Spider"_Liquid_Fuel_Engine""")),
     Engine("Twitch", Radial(2, 4, 6, 8), 400, 0.09, 16, 250, 290, Liquid, wiki = Some("""24-77_"Twitch"_Liquid_Fuel_Engine""")),
@@ -158,7 +156,7 @@ case class Adapter(
 
 class Adapters(val adapters: List[Adapter])
 object Adapters {
-  implicit val Stock = new Adapters(List(
+  val Stock = new Adapters(List(
     Adapter("FL-A10", Tiny, Small, 0.05, 150, wiki = Some("FL-A10_Adapter")),
     Adapter("Rockomax Brand", Small, Large, 0.10, 500, wiki = Some("Rockomax_Brand_Adapter")),
     Adapter("Kerbodyne ADTP-2-3", Large, ExtraLarge, 0.2, 2600, wiki = Some("Kerbodyne_ADTP-2-3")),

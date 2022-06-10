@@ -4,10 +4,13 @@ import org.scalatest._
 import wordspec._
 
 class EngineTest extends AnyWordSpec {
-  val poodle = Engines.Stock.engines.find(_.name.contains("Poodle")).get
-  val kr1x2 = Engines.Stock.engines.find(_.name.contains("Twin-Boar")).get
 
-  val largeLiquidTanks = FuelTanks.Stock.tanks.filter { tank =>
+  implicit val engines: Engines = Engines.Stock
+  implicit val tanks: FuelTanks = FuelTanks.Stock
+
+  val poodle = engines.engines.find(_.name.contains("Poodle")).get
+  val kr1x2 = engines.engines.find(_.name.contains("Twin-Boar")).get
+  val largeLiquidTanks = tanks.tanks.filter { tank =>
     tank.mount == Large && tank.fuel == Liquid
   }.toSet
 

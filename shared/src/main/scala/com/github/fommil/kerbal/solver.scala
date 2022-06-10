@@ -93,7 +93,7 @@ object Solver {
     implicit
     engines: Engines,
     allTanks: FuelTanks,
-    adapters: Adapters
+    adapters: Adapters,
   ): Stream[EngineSolution] = for {
     engine <- engines.engines.toStream
     candidate <- candidates(engine, payloadMass, atmosphere, size)

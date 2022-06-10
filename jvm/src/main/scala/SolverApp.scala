@@ -10,6 +10,10 @@ object Solve extends App {
       (if (s.adapters.isEmpty) "" else f" with adapters ${s.adapters.map(_.name)}") +
       f" [a = ${s.initialAccel}%.1f, dv = ${s.totalDeltaV}%.0f, cost = ${s.stageCost}%.0f, mass = ${s.stageInitialMass}%.1ft]"
 
+  implicit val engines: Engines = Engines.Stock
+  implicit val tanks: FuelTanks = FuelTanks.Stock
+  implicit val adapters: Adapters = Adapters.Stock
+
   val solns = Solver.solve(args.toList)
   solns.sortBy(_.stageInitialMass).foreach { soln =>
     println(prettyPrint(soln))

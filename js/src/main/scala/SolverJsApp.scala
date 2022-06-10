@@ -16,14 +16,18 @@ object SolverJsApp
   val ids = List("dv", "M", "a", "atm", "size")
   val ids2 = List("engine", "currentM", "stageFuel")
 
+  implicit val engines: Engines = Engines.Stock
+  implicit val tanks: FuelTanks = FuelTanks.Stock
+  implicit val adapters: Adapters = Adapters.Stock
+
   def main(args: Array[String]): Unit = {
     jQuery("#submit").click(design _)
     jQuery("#submit2").click(ops _)
 
-    val sizes = implicitly[Adapters].adapters.map(_.upper.name).distinct
+    val sizes = SolverJsApp.adapters.adapters.map(_.upper.name).distinct
     populate("size", sizes)
 
-    val engines = implicitly[Engines].engines.map(_.name).sorted
+    val engines = SolverJsApp.engines.engines.map(_.name).sorted
     populate("engine", engines)
 
     loadParams(ids)
@@ -60,9 +64,8 @@ object SolverJsApp
       val mass = input(1).toDouble
       val fuelMass = engine.fuel.toTonnes(input(2).toDouble)
 
-      val engines = 1 // irrelevant
       val tank = FixedFuelTank("Unknown", engine.fuel, engine.mount, 0, 0, 0, fuelMass)
-      val soln = EngineSolution(mass, engine, engines, tank, fuelMass, false, Nil)
+      val soln = EngineSolution(mass, engine, 1, tank, fuelMass, false, Nil)
 
       jQuery("#results2").append(
         f"<p>remaining Δv = ${soln.totalDeltaV}%1.0f</p>"
