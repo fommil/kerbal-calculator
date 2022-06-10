@@ -8,7 +8,7 @@ object Kerbin {
 sealed trait Mount {
   /** Maximum (sensible) number of parts to fit around the payload/tank. */
   def max(tank: FuelTank): Int = 1
-  def name: String = getClass.getSimpleName
+  def name: String = this.toString
 }
 object Mount {
   def fromName(name: String)(implicit all: Adapters): Option[Mount] = {
