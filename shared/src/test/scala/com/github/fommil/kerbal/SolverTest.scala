@@ -29,9 +29,8 @@ class SolverTest extends AnyWordSpec {
       val best_engines = bestEngines(results)
       val expect = Set(
         "Skipper",
-        "Thud",
-        "Thumper (Radial)",
-        "Kickback"
+        "Dart (Radial)",
+        "Vector (Radial)"
       )
       assert(best_engines == expect)
     }
@@ -41,19 +40,21 @@ class SolverTest extends AnyWordSpec {
       val best_engines = bestEngines(results)
       val expect = Set(
         "Dawn",
-        "Spider"
+        "Ant (Radial)"
       )
       assert(best_engines == expect)
     }
 
-    "recommend radial solid boosters and lifters for a lift-off" in {
+    // solids don't appear here, interestingly. But takeoff isn't a good use of
+    // this tool, typically.
+    "recommend lifters for a lift-off" in {
       val results = Solver.solve(1000, 50, 10, true, Large)
       val best_engines = bestEngines(results)
       val expect = Set(
-        "Mainsail",
+        "Vector (Radial)",
         "Twin-Boar",
-        "Mammoth",
-        "Rhino"
+        "Mainsail",
+        "Dart (Radial)"
       )
       assert(best_engines == expect)
     }

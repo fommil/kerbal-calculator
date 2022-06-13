@@ -64,7 +64,7 @@ object SolverJsApp
       val mass = input(1).toDouble
       val fuelMass = engine.fuel.toTonnes(input(2).toDouble)
 
-      val tank = FixedFuelTank("Unknown", engine.fuel, engine.mount, 0, 0, 0, fuelMass)
+      val tank = FuelTank("Unknown", engine.fuel, engine.mount, 0, 0, 0, fuelMass, null)
       val soln = EngineSolution(mass, engine, 1, tank, fuelMass, false, Nil)
 
       jQuery("#results2").append(

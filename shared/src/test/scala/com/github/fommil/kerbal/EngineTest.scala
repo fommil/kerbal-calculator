@@ -11,7 +11,10 @@ class EngineTest extends AnyWordSpec {
   val poodle = engines.engines.find(_.name.contains("Poodle")).get
   val kr1x2 = engines.engines.find(_.name.contains("Twin-Boar")).get
   val largeLiquidTanks = tanks.tanks.filter { tank =>
-    tank.mount == Large && tank.fuel == Liquid
+    tank.mount match {
+      case Radial(_) | Large => tank.fuel == Liquid
+      case _ => false
+    }
   }.toSet
 
   "Engines" should {
