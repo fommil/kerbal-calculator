@@ -7,7 +7,6 @@ sealed trait Fuel {
    */
   def toTonnes(units: Double): Double
 }
-// TODO check these numbers (or deprecate Ops)
 case object Liquid extends Fuel {
   def toTonnes(lg: Double) = 0.005 * lg
 }
